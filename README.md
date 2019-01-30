@@ -14,5 +14,9 @@
 2. sh dots.sh   <-- homeディレクトリにシンボリックリンクを作成
 
 
+## Memo
+- 20190131 `dotfiles/.vim/dein/` 内のいくつかのファイルを `.gitignore` に入れたけど大丈夫だろうか
+
 ## ToDo
 - dein.vim 内で 
+

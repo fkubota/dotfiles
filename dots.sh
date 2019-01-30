@@ -19,7 +19,7 @@ for f in .??*; do
     ln -snfv ~/dotfiles/"$f" ~/
 done
 
-[ -e ~/.gitconfig.local ] || cp ~/dotfiles/.gitconfig.local.template ~/.gitconfig.local
+# [ -e ~/.gitconfig.local ] || cp ~/dotfiles/.gitconfig.local.template ~/.gitconfig.local
 
 cat << END
 

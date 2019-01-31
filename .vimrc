@@ -6,3 +6,4 @@ runtime! configs/plugins/*.vim
 " lightline.vim の設定
 set laststatus=2
 
+:set number

@@ -1,44 +1,28 @@
-### Issue
+<!--- To assist in resolving your issue, provide as much information as possible. -->
 
-<!--
-Please describe the issue here.
+### Environment
+<!--- Describe your Vim/NERDTree setup. -->
 
-If you are not using jedi-vim from Git (but e.g. from a distribution's package,
-please try it with jedi-vim's Git master, too).
--->
+* Operating System: 
+* Vim version `:version`: 
+* NERDTree version `git rev-parse --short HEAD`: 
+* NERDTree settings applied in your vimrc, if any:
+    ```vim
+    ```
 
-### Steps to reproduce
+### Process
+<!--- List the steps that will recreate the issue. -->
 
-<!--
-Include if relevant.
+1. 
 
-Please provide steps to reproduce it here, preferably based on a minimal Vim
-configuration.
+### Current Result
+<!--- Describe what you you currently experience from this process. -->
 
-You can use the following template (save it as `minimal.vimrc` in the directory
-where jedi-vim is installed, `cd` into that directory, and run Vim with
-`vim -u minimal.vimrc`):
+### Expected Result
+<!--- Describe what you would have expected from this process. -->
 
-```
-set nocompatible
+### Screenshot(s)
 
-let script_dir = fnamemodify(expand('<sfile>'), ':h')
-let &runtimepath .= ','.script_dir.','.script_dir.'/after'
+### Possible Fix
+<!--- If you have explored the code, share what you've found. -->
 
-" Put your config changes here.
-" let g:jedi#show_call_signatures=1
-
-syntax on
-filetype plugin indent on
-```
-
-Please provide the `minimal.vimrc` you have used here, too.
--->
-
-### Output of “:verbose JediDebugInfo”
-
-<!--
-Please execute `:redir @+> | silent verb JediDebugInfo | redir END` in a
-Python buffer to copy debug information into your clipboard.
-Then paste it here.
--->

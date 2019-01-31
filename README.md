@@ -11,7 +11,8 @@
 
 ## clone 後の　ToDo
 1. cd ~/dotfiles/
-2. sh dots.sh   <-- homeディレクトリにシンボリックリンクを作成
+2. jedi-vim のインストール (Boostnote])
+3. sh dots.sh   <-- homeディレクトリにシンボリックリンクを作成
 
 
 ## Memo

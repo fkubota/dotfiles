@@ -25,9 +25,9 @@ begin
 end
 
 # fzf
-fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
-}
+set -U FZF_LEGACY_KEYBINDINGS 0
+set -U FZF_DEFAULT_OPTS "--reverse --border"
+set -U FZF_ALT_C_OPTS   "--preview 'tree -C {} | head -200'"
+set -U FZF_CTRL_T_OPTS "--preview 'bat  --color=always --style=header,grid --line-range :100 {}'"
+echo "hello"
+

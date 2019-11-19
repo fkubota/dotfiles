@@ -2,9 +2,9 @@ alias cl="xclip -in -sel clip"
 alias rl="readlink -f"
 
 #peco
-function fish_user_key_bindings
-    bind \cr peco_select_history
-end
+# function fish_user_key_bindings
+#     bind \cr peco_select_history
+# end
 
 # color 
 set fish_color_command '#A0DDFF'
@@ -28,6 +28,6 @@ end
 set -gx FZF_LEGACY_KEYBINDINGS 0
 set -gx FZF_CTRL_T_OPTS "--preview 'bat  --color=always --style=header,grid --line-range :200 {}'"
 set -gx FZF_DEFAULT_OPTS "--height 80% --reverse --border"
-set -gx FZF_ALT_C_OPTS   "--preview 'tree -C {} | head -200'"
+set -gx FZF_ALT_C_OPTS   "--preview 'tree -F -C {} | head -200'"
 # set -gx FZF_CTRL_T_OPTS "--preview 'bat --color \"always\" {}' --height 90%"
 

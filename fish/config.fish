@@ -25,9 +25,9 @@ begin
 end
 
 # fzf
-set -U FZF_LEGACY_KEYBINDINGS 0
-set -U FZF_DEFAULT_OPTS "--reverse --border"
-set -U FZF_ALT_C_OPTS   "--preview 'tree -C {} | head -200'"
-set -U FZF_CTRL_T_OPTS "--preview 'bat  --color=always --style=header,grid --line-range :100 {}'"
-echo "hello"
+set -gx FZF_LEGACY_KEYBINDINGS 0
+set -gx FZF_CTRL_T_OPTS "--preview 'bat  --color=always --style=header,grid --line-range :200 {}'"
+set -gx FZF_DEFAULT_OPTS "--height 80% --reverse --border"
+set -gx FZF_ALT_C_OPTS   "--preview 'tree -C {} | head -200'"
+# set -gx FZF_CTRL_T_OPTS "--preview 'bat --color \"always\" {}' --height 90%"
 

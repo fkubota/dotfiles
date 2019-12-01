@@ -1,5 +1,6 @@
 alias cl="xclip -in -sel clip"
 alias rl="readlink -f"
+alias lf="find (pwd) -name"
 
 #peco
 # function fish_user_key_bindings

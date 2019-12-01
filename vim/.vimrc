@@ -47,7 +47,21 @@ endif
 
 " ===== basics =====
 " color scheme
-syntax enable
+syntax on
+colorscheme molokai
+set t_Co=256
+if !has('gui_running') " これないと背景透明ならない
+    augroup seiya
+        autocmd!
+        autocmd VimEnter,ColorScheme * highlight Normal ctermbg=none
+        autocmd VimEnter,ColorScheme * highlight LineNr ctermbg=none
+        autocmd VimEnter,ColorScheme * highlight SignColumn ctermbg=none
+        autocmd VimEnter,ColorScheme * highlight VertSplit ctermbg=none
+        autocmd VimEnter,ColorScheme * highlight NonText ctermbg=none
+    augroup END
+endif
 
 " lightline
 set laststatus=2
+
+

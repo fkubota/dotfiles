@@ -1,11 +1,13 @@
 # vim
 ln -sf ~/Git/dotfiles/vim/.vimrc ~/.vimrc
-ln -sf ~/Git/dotfiles/vim/rc ~/.vim/rc
+ln -sf ~/Git/dotfiles/vim/rc/dein.toml ~/.vim/rc/dein.toml
+ln -sf ~/Git/dotfiles/vim/rc/dein_lazy.toml ~/.vim/rc/dein_lazy.toml
+ln -sf ~/Git/dotfiles/vim/hybrid.vim ~/.vim/colors/hybrid.vim
 
 # tmux
-ln -sh ~/Git/dotfiles/tmux/.tmux.conf ~/.tmux.conf
+ln -sf ~/Git/dotfiles/tmux/.tmux.conf ~/.tmux.conf
 
 # fish
-ln -sh ~/Git/dotfiles/fish/config.fish ~/.config/fish/config.fish
-ln -sh ~/Git/dotfiles/fish/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
+ln -sf ~/Git/dotfiles/fish/config.fish ~/.config/fish/config.fish
+ln -sf ~/Git/dotfiles/fish/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
 

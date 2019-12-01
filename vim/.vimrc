@@ -1,4 +1,3 @@
-
 " ------------ dein start
 " プラグインがインストールされるディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
@@ -46,22 +45,30 @@ endif
 
 
 " ===== basics =====
+set number " 行番号
+set hlsearch " 検索結果をハイライト
+set shiftwidth=2 " インデント幅
+set incsearch " インクリメンタルサーチ
+nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
+
 " color scheme
 syntax on
 colorscheme molokai
 set t_Co=256
 if !has('gui_running') " これないと背景透明ならない
-    augroup seiya
-        autocmd!
-        autocmd VimEnter,ColorScheme * highlight Normal ctermbg=none
-        autocmd VimEnter,ColorScheme * highlight LineNr ctermbg=none
-        autocmd VimEnter,ColorScheme * highlight SignColumn ctermbg=none
-        autocmd VimEnter,ColorScheme * highlight VertSplit ctermbg=none
-        autocmd VimEnter,ColorScheme * highlight NonText ctermbg=none
-    augroup END
+  augroup seiya
+    autocmd!
+    autocmd VimEnter,ColorScheme * highlight Normal ctermbg=none
+    autocmd VimEnter,ColorScheme * highlight LineNr ctermbg=none
+    autocmd VimEnter,ColorScheme * highlight SignColumn ctermbg=none
+    autocmd VimEnter,ColorScheme * highlight VertSplit ctermbg=none
+    autocmd VimEnter,ColorScheme * highlight NonText ctermbg=none
+  augroup END
 endif
 
 " lightline
 set laststatus=2
 
+" コメントの色だけ、colorschemeから変更
+hi Comment ctermfg=245
 

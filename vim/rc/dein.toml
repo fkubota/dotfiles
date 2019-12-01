@@ -1,0 +1,3 @@
+# dein本体。基本は repo に github のリポジトリを設定するだけでよい
+[[plugins]]
+repo = 'Shougo/dein.vim'

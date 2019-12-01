@@ -10,14 +10,11 @@
   - `~/dotfiles/.vim/configs/plugins/install` 内の、`dein.toml` と `dein_lazy.toml`内にプラグインを記述
 
 ## clone 後の　ToDo
-1. cd ~/Git/dotfiles/
-2. jedi-vim のインストール (Boostnote])
-3. sh dots.sh   <-- homeディレクトリにシンボリックリンクを作成
+# 1. cd ~/Git/dotfiles/
+# 2. jedi-vim のインストール (Boostnote])
+# 3. sh dots.sh   <-- homeディレクトリにシンボリックリンクを作成
 
+1. `pip3 install --user jedi`  <--- jedi-vim のinstall
+2. `sh ~/Git/dotfilessh/setup_vim.sh`  <--- set up vim
 
-## Memo
-- 20190131 `dotfiles/.vim/dein/` 内のいくつかのファイルを `.gitignore` に入れたけど大丈夫だろうか
-
-## ToDo
-- dein.vim 内で 
 

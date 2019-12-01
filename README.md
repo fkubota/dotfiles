@@ -9,12 +9,9 @@
     > http://applepine1125.hatenablog.jp/entry/2017/03/24/003559
   - `~/dotfiles/.vim/configs/plugins/install` 内の、`dein.toml` と `dein_lazy.toml`内にプラグインを記述
 
-## clone 後の　ToDo
-# 1. cd ~/Git/dotfiles/
-# 2. jedi-vim のインストール (Boostnote])
-# 3. sh dots.sh   <-- homeディレクトリにシンボリックリンクを作成
 
 1. `pip3 install --user jedi`  <--- jedi-vim のinstall
-2. `sh ~/Git/dotfilessh/setup_vim.sh`  <--- set up vim
+2. `sh ~/Git/dotfiles/01_setup_vim.sh`  <--- set up vim
+3. `sh ~/Git/dotfiles/02_link_dotfiles.sh` <--- シンボリックリンクを作成
 
 

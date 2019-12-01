@@ -50,6 +50,7 @@ set hlsearch " 検索結果をハイライト
 set shiftwidth=2 " インデント幅
 set incsearch " インクリメンタルサーチ
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
+autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python3 % 
 
 " color scheme
 syntax on

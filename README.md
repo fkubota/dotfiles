@@ -10,7 +10,7 @@
   - `~/dotfiles/.vim/configs/plugins/install` 内の、`dein.toml` と `dein_lazy.toml`内にプラグインを記述
 
 ## clone 後の　ToDo
-1. cd ~/dotfiles/
+1. cd ~/Git/dotfiles/
 2. jedi-vim のインストール (Boostnote])
 3. sh dots.sh   <-- homeディレクトリにシンボリックリンクを作成
 

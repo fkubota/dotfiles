@@ -48,3 +48,6 @@ endif
 " ===== basics =====
 " color scheme
 syntax enable
+
+" lightline
+set laststatus=2

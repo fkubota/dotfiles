@@ -62,7 +62,7 @@ set shiftwidth=2 " インデント幅
 set incsearch " インクリメンタルサーチ
 set paste " pasteが変な感じにならないように
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
-autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python3 % 
+autocmd BufNewFile,BufRead *.py nnoremap <C-p> :!python3 % 
 
 " color scheme
 syntax on

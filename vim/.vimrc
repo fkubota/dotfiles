@@ -1,3 +1,14 @@
+" 
+" 
+"        _                    
+" __   _(_)_ __ ___  _ __ ___ 
+" \ \ / / | '_ ` _ \| '__/ __|
+"  \ V /| | | | | | | | | (__ 
+" (_)_/ |_|_| |_| |_|_|  \___|
+"                             
+"
+
+" 
 " ------------ dein start
 " プラグインがインストールされるディレクトリ
 let s:dein_dir = expand('~/.cache/dein')
@@ -49,6 +60,7 @@ set number " 行番号
 set hlsearch " 検索結果をハイライト
 set shiftwidth=2 " インデント幅
 set incsearch " インクリメンタルサーチ
+set paste " pasteが変な感じにならないように
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
 autocmd BufNewFile,BufRead *.py nnoremap <C-e> :!python3 % 
 
@@ -73,3 +85,12 @@ set laststatus=2
 " コメントの色だけ、colorschemeから変更
 hi Comment ctermfg=245
 
+" カーソルの形
+if has('vim_starting')
+    " 挿入モード時に非点滅の縦棒タイプのカーソル
+    let &t_SI .= "\e[6 q"
+    " ノーマルモード時に非点滅のブロックタイプのカーソル
+    let &t_EI .= "\e[2 q"
+    " 置換モード時に非点滅の下線タイプのカーソル
+    let &t_SR .= "\e[4 q"
+endif

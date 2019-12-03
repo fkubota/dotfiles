@@ -63,7 +63,7 @@ set tabstop=4 " tab
 set incsearch " インクリメンタルサーチ
 set paste " pasteが変な感じにならないように
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
-autocmd BufNewFile,BufRead *.py nnoremap <C-0> :!python3 % 
+autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 % 
 
 " color scheme
 syntax on

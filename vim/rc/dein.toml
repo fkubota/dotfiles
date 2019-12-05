@@ -6,7 +6,7 @@ repo = 'Shougo/dein.vim'
 repo = 'itchyny/lightline.vim'
 
 [[plugins]]
-repo = 'TOwnk/vim-autoclose'
+repo = 'Townk/vim-autoclose'
 
 [[plugins]]
 repo = 'tomasr/molokai'

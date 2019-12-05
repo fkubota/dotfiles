@@ -41,6 +41,8 @@ if dein#load_state(s:dein_dir)
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('davidhalter/jedi-vim')
+  call dein#add('Townk/vim-autoclose')
+  call dein#add('scrooloose/syntastic')
 
   " 設定終了
   call dein#end()

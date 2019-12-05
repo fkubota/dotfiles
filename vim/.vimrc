@@ -57,6 +57,7 @@ endif
 
 " ===== basics =====
 set number " 行番号
+set autoindent " indent補完
 set hlsearch " 検索結果をハイライト
 set shiftwidth=2 " インデント幅
 set tabstop=4 " tab

@@ -98,3 +98,6 @@ if has('vim_starting')
     " 置換モード時に非点滅の下線タイプのカーソル
     let &t_SR .= "\e[4 q"
 endif
+
+" synstastic
+let g:syntastic_python_checkers = ["flake8"]

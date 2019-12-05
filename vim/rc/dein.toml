@@ -10,3 +10,6 @@ repo = 'Townk/vim-autoclose'
 
 [[plugins]]
 repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'scrooloose/syntastic'

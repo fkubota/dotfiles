@@ -9,7 +9,4 @@ repo = 'itchyny/lightline.vim'
 repo = 'TOwnk/vim-autoclose'
 
 [[plugins]]
-repo = 'scrooloose/syntastic'
-
-[[plugins]]
 repo = 'tomasr/molokai'

@@ -12,4 +12,4 @@ repo = 'Townk/vim-autoclose'
 repo = 'tomasr/molokai'
 
 [[plugins]]
-repo = 'scrooloose/synstastic'
+repo = 'scrooloose/syntastic'

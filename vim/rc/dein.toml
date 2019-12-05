@@ -5,5 +5,3 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
-[[plugins]]
-repo = 'ervandew/supertab'

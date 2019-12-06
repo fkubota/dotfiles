@@ -59,14 +59,17 @@ endif
 
 " ===== basics =====
 set number " 行番号
-set autoindent " indent補完
 set hlsearch " 検索結果をハイライト
 set shiftwidth=2 " インデント幅
 set tabstop=4 " tab
 set incsearch " インクリメンタルサーチ
 set paste " pasteが変な感じにならないように
+set autoindent " indent補完
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 % 
+
+" synstastic
+let g:syntastic_python_checkers = ["flake8"]
 
 " color scheme
 syntax on
@@ -99,9 +102,4 @@ if has('vim_starting')
     let &t_SR .= "\e[4 q"
 endif
 
-" synstastic
-let g:syntastic_python_checkers = ["flake8"]
-
-" autoclose
-let g:AutoClosePairs = {'(': ')', '{': '}', '[': ']', '"': '"', "'": "'", '#{': '}', '|':'|' }
 

@@ -6,10 +6,11 @@ repo = 'Shougo/dein.vim'
 repo = 'itchyny/lightline.vim'
 
 [[plugins]]
-repo = 'Townk/vim-autoclose'
-
-[[plugins]]
 repo = 'tomasr/molokai'
 
 [[plugins]]
 repo = 'scrooloose/syntastic'
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+

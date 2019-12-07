@@ -1,5 +1,7 @@
 " 
 " 
+" 
+" 
 "        _                    
 " __   _(_)_ __ ___  _ __ ___ 
 " \ \ / / | '_ ` _ \| '__/ __|
@@ -41,7 +43,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('Shougo/neosnippet.vim')
   call dein#add('Shougo/neosnippet-snippets')
   call dein#add('davidhalter/jedi-vim')
-  call dein#add('Townk/vim-autoclose')
+  call dein#add('cohama/lexima.vim')
   call dein#add('scrooloose/syntastic')
 
   " 設定終了
@@ -54,6 +56,7 @@ if dein#check_install()
   call dein#install()
 endif
 
+call map(dein#check_clean(), "delete(v:val, 'rf')")
 " ------------ dein end
 
 
@@ -63,7 +66,7 @@ set hlsearch " 検索結果をハイライト
 set shiftwidth=2 " インデント幅
 set tabstop=4 " tab
 set incsearch " インクリメンタルサーチ
-set paste " pasteが変な感じにならないように
+"set paste " pasteが変な感じにならないように"<---これいれると、lexima.vimがうごかない
 set autoindent " indent補完
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 % 
@@ -101,5 +104,4 @@ if has('vim_starting')
     " 置換モード時に非点滅の下線タイプのカーソル
     let &t_SR .= "\e[4 q"
 endif
-
 

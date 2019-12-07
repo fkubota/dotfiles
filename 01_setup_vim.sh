@@ -9,3 +9,5 @@ sh ~/installer.sh ~/.cache
 
 # flake8のインストール
 pip3 install flake8
+
+

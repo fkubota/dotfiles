@@ -11,6 +11,9 @@ repo = 'tomasr/molokai'
 [[plugins]]
 repo = 'scrooloose/syntastic'
 
-[[plugins]]
-repo = 'Townk/vim-autoclose'
 
+[[plugins]]
+repo = 'cohama/lexima.vim'
+
+[[plugins]]
+repo = 'ervandew/supertab'

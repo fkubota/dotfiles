@@ -17,3 +17,6 @@ repo = 'cohama/lexima.vim'
 
 [[plugins]]
 repo = 'ervandew/supertab'
+
+[[plugins]]
+repo = 'tyru/caw.vim'

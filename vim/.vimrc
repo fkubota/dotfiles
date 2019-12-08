@@ -92,6 +92,10 @@ endif
 " lightline
 set laststatus=2
 
+" caw.vim (コメントアウトトグル)
+nmap <C-_> <Plug>(caw:hatpos:toggle)
+vmap <C-_> <Plug>(caw:hatpos:toggle)
+
 " コメントの色だけ、colorschemeから変更
 hi Comment ctermfg=245
 

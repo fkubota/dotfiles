@@ -109,3 +109,17 @@ if has('vim_starting')
     let &t_SR .= "\e[4 q"
 endif
 
+" split
+nnoremap s <Nop>
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+call submode#enter_with('bufmove', 'n', '', 'sL', '<C-w>>')
+call submode#enter_with('bufmove', 'n', '', 'sH', '<C-w><')
+call submode#enter_with('bufmove', 'n', '', 'sK', '<C-w>+')
+call submode#enter_with('bufmove', 'n', '', 'sJ', '<C-w>-')
+call submode#map('bufmove', 'n', '', 'L', '<C-w>>')
+call submode#map('bufmove', 'n', '', 'H', '<C-w><')
+call submode#map('bufmove', 'n', '', 'K', '<C-w>+')
+call submode#map('bufmove', 'n', '', 'J', '<C-w>-')

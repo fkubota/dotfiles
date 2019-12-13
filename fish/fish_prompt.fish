@@ -63,20 +63,20 @@ function fish_prompt
   echo -e ''
   # vim
 #    if test -z (string match -ri '^no|false|0$' $tomita_vi_mode)
-    printf '['
-    switch $fish_bind_mode
-      case default
-        set_color --bold red
-        printf 'N'
-      case insert
-        set_color --bold green
-        printf 'I'
-      case visual
-        set_color --bold magenta
-        printf 'N'
-    end
-    set_color normal
-    printf '] '
+#    printf '['
+#    switch $fish_bind_mode
+#      case default
+#        set_color --bold red
+#        printf 'N'
+#      case insert
+#        set_color --bold green
+#        printf 'I'
+#      case visual
+#        set_color --bold magenta
+#        printf 'N'
+#    end
+#    set_color normal
+#    printf '] '
 #  end
 
   # fish icon

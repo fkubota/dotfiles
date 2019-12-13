@@ -110,16 +110,19 @@ if has('vim_starting')
 endif
 
 " split
-" nnoremap s <Nop>
-" nnoremap sj <C-w>j
-" nnoremap sk <C-w>k
-" nnoremap sl <C-w>l
-" nnoremap sh <C-w>h
-" call submode#enter_with('bufmove', 'n', '', 'sL', '<C-w>>')
-" call submode#enter_with('bufmove', 'n', '', 'sH', '<C-w><')
-" call submode#enter_with('bufmove', 'n', '', 'sK', '<C-w>+')
-" call submode#enter_with('bufmove', 'n', '', 'sJ', '<C-w>-')
-" call submode#map('bufmove', 'n', '', 'L', '<C-w>>')
-" call submode#map('bufmove', 'n', '', 'H', '<C-w><')
-" call submode#map('bufmove', 'n', '', 'K', '<C-w>+')
-" call submode#map('bufmove', 'n', '', 'J', '<C-w>-')
+nnoremap s <Nop>
+nnoremap s\| :<C-u>vs<CR>
+nnoremap s- :<C-u>sp<CR>
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sh <C-w>h
+nnoremap sL <C-w>>
+nnoremap sH <C-w><
+nnoremap sK <C-w>+
+nnoremap sJ <C-w>-
+
+" tab
+nnoremap st :<C-u>tabnew<CR>
+nnoremap sn gt
+nnoremap sp gT

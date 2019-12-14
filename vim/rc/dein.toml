@@ -8,8 +8,8 @@ repo = 'itchyny/lightline.vim'
 [[plugins]]
 repo = 'tomasr/molokai'
 
-[[plugins]]
-repo = 'scrooloose/syntastic'
+# [[plugins]]
+# repo = 'scrooloose/syntastic'
 
 
 [[plugins]]
@@ -21,8 +21,6 @@ repo = 'ervandew/supertab'
 [[plugins]]
 repo = 'tyru/caw.vim'
 
-# [[plugins]]
-# repo = 'Shougo/denite.nvim'
 [[plugins]]
 repo = 'Shougo/unite.vim.git'
 
@@ -30,4 +28,4 @@ repo = 'Shougo/unite.vim.git'
 repo = 'Shougo/vimfiler'
 
 [[plugins]]
-repo = 'ryanoasis/vim-devicons'
+repo = 'w0rp/ale'

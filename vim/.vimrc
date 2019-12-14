@@ -46,7 +46,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('davidhalter/jedi-vim')
   call dein#add('cohama/lexima.vim')
   call dein#add('scrooloose/syntastic')
-  call dein#add('Shougo/denite.nvim')
+  call dein#add('ryanoasis/vim-devicons')
 
   " 設定終了
   call dein#end()
@@ -68,13 +68,13 @@ set hlsearch " 検索結果をハイライト
 set shiftwidth=2 " インデント幅
 set tabstop=4 " tab
 set incsearch " インクリメンタルサーチ
+nmap <silent> <C-k> 5k
+nmap <silent> <C-j> 5j
 "set paste " pasteが変な感じにならないように"<---これいれると、lexima.vimがうごかない
 set autoindent " indent補完
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 % 
 
-" synstastic
-let g:syntastic_python_checkers = ["flake8"]
 
 " color scheme
 syntax on
@@ -113,8 +113,8 @@ endif
 
 " split
 nnoremap s <Nop>
-nnoremap s\| :<C-u>vs<CR>
-nnoremap s- :<C-u>sp<CR>
+nnoremap s\| :<C-u>vs<CR><C-w>l
+nnoremap s- :<C-u>sp<CR><C-w>j
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k
 nnoremap sl <C-w>l
@@ -140,3 +140,7 @@ let g:vimfiler_tree_leaf_icon = ''
 let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_marked_file_icon = '✓'
+
+
+" ale
+let g:ale_linters = { 'python': ['flake8'] }

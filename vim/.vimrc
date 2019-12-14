@@ -2,6 +2,7 @@
 " 
 " 
 " 
+" 
 "        _                    
 " __   _(_)_ __ ___  _ __ ___ 
 " \ \ / / | '_ ` _ \| '__/ __|
@@ -45,6 +46,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('davidhalter/jedi-vim')
   call dein#add('cohama/lexima.vim')
   call dein#add('scrooloose/syntastic')
+  call dein#add('Shougo/denite.nvim')
 
   " 設定終了
   call dein#end()
@@ -126,3 +128,15 @@ nnoremap sJ <C-w>-
 nnoremap st :<C-u>tabnew<CR>
 nnoremap sn gt
 nnoremap sp gT
+
+" ----- vimfiler -----
+nmap sf :VimFilerBufferDir<Return>
+nmap sF :VimFilerExplorer -find<Return>
+nmap sb :Unite buffer<Return>
+let g:vimfiler_as_default_explorer = 1
+let g:vimfiler_safe_mode_by_default = 0
+let g:vimfiler_enable_auto_cd = 0
+let g:vimfiler_tree_leaf_icon = ''
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_marked_file_icon = '✓'

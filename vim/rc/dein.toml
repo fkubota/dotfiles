@@ -20,3 +20,14 @@ repo = 'ervandew/supertab'
 
 [[plugins]]
 repo = 'tyru/caw.vim'
+
+# [[plugins]]
+# repo = 'Shougo/denite.nvim'
+[[plugins]]
+repo = 'Shougo/unite.vim.git'
+
+[[plugins]]
+repo = 'Shougo/vimfiler'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'

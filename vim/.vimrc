@@ -68,9 +68,8 @@ set hlsearch " 検索結果をハイライト
 set shiftwidth=2 " インデント幅
 set tabstop=4 " tab
 set incsearch " インクリメンタルサーチ
-nmap <silent> <C-k> 5k
-nmap <silent> <C-j> 5j
-"set paste " pasteが変な感じにならないように"<---これいれると、lexima.vimがうごかない
+nnoremap <C-k> :cprevious<CR>   " quickfix前へ
+nnoremap <C-j> :cnext<CR>       " quickfix次へ
 set autoindent " indent補完
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 % 

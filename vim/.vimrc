@@ -68,6 +68,8 @@ set hlsearch " 検索結果をハイライト
 set shiftwidth=2 " インデント幅
 set tabstop=4 " tab
 set incsearch " インクリメンタルサーチ
+set cursorline " 現在行番号に色をつける
+hi clear CursorLine " 現在行番号に色をつける
 nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ
 set autoindent " indent補完

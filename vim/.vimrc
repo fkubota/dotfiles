@@ -68,8 +68,6 @@ set hlsearch " 検索結果をハイライト
 set shiftwidth=2 " インデント幅
 set tabstop=4 " tab
 set incsearch " インクリメンタルサーチ
-set cursorline " 現在行番号に色をつける
-hi clear CursorLine " 現在行番号に色をつける
 nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ
 set autoindent " indent補完
@@ -81,6 +79,9 @@ autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 %
 syntax on
 colorscheme molokai
 set t_Co=256
+set cursorline " 現在行番号に色をつける
+hi clear CursorLine " 現在行に色をつける
+highlight CursorLine ctermbg=238
 if !has('gui_running') " これないと背景透明ならない
   augroup seiya
     autocmd!
@@ -91,6 +92,7 @@ if !has('gui_running') " これないと背景透明ならない
     autocmd VimEnter,ColorScheme * highlight NonText ctermbg=none
   augroup END
 endif
+
 
 " lightline
 set laststatus=2
@@ -145,3 +147,4 @@ let g:vimfiler_marked_file_icon = '✓'
 
 " ale
 let g:ale_linters = { 'python': ['flake8'] }
+

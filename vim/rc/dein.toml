@@ -29,3 +29,6 @@ repo = 'Shougo/vimfiler'
 
 [[plugins]]
 repo = 'w0rp/ale'
+
+[[plugins]]
+repo = 'skanehira/preview-markdown.vim'

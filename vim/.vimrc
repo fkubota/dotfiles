@@ -144,10 +144,8 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_marked_file_icon = '✓'
 
-
 " ale
 let g:ale_linters = { 'python': ['flake8'] }
-
 
 " preview markdown
 let g:preview_markdown_vertical = 1

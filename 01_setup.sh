@@ -13,4 +13,4 @@ pip3 install flake8
 
 # tmux
 mkdir -p /home/fkubota/.tmux/theme/
-git clone https://github.com/arcticicestudio/nord-tmux.git ~/Git/nord-tmux
+git clone https://github.com/arcticicestudio/nord-tmux.git ~/.tmux/themes/nord-tmux

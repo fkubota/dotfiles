@@ -72,8 +72,9 @@ nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ
 set autoindent " indent補完
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
-autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 % 
-autocmd BufNewFile,BufRead *.vue set filetype=html
+autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 %  
+autocmd BufNewFile,BufRead *.vue set filetype=html          " vueファイル
+autocmd BufNewFile,BufRead *.html nnoremap <C-q> :!vivaldi % 
 
 
 " color scheme

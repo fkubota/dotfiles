@@ -79,7 +79,8 @@ autocmd BufNewFile,BufRead *.html nnoremap <C-q> :!vivaldi %
 
 " color scheme
 syntax on
-colorscheme molokai
+" colorscheme molokai
+colorscheme nord
 set t_Co=256
 set cursorline " 現在行番号に色をつける
 hi clear CursorLine " 現在行に色をつける

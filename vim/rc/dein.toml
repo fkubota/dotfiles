@@ -35,3 +35,6 @@ repo = 'skanehira/preview-markdown.vim'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'
+
+[[plugins]]
+repo = 'arcticicestudio/nord-vim'

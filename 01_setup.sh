@@ -8,7 +8,7 @@ curl https//raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > 
 sh ~/installer.sh ~/.cache
 
 # flake8のインストール
-pip3 install flake8
+pip3 install flake8 --user
 
 
 # tmux

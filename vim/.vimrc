@@ -68,6 +68,7 @@ set hlsearch " 検索結果をハイライト
 set shiftwidth=2 " インデント幅
 set tabstop=4 " tab
 set incsearch " インクリメンタルサーチ
+set pastetoggle=<F2> " set paste & set nopaste のトグル
 nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ
 set autoindent " indent補完

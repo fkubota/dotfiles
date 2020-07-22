@@ -38,3 +38,6 @@ repo = 'Yggdroot/indentLine'
 
 [[plugins]]
 repo = 'arcticicestudio/nord-vim'
+
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'

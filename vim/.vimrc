@@ -65,17 +65,44 @@ call map(dein#check_clean(), "delete(v:val, 'rf')")
 " ===== basics =====
 set number " 行番号
 set hlsearch " 検索結果をハイライト
-set shiftwidth=2 " インデント幅
-set tabstop=4 " tab
+" set shiftwidth=2 " インデント幅
+set tabstop=2 " tab
 set incsearch " インクリメンタルサーチ
 set pastetoggle=<F2> " set paste & set nopaste のトグル
 nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ
-set autoindent " indent補完
+" set autoindent " indent補完
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 %  
+" autocmd BufNewFile,BufRead *.py set tabstop=4 " pythonのときだけ、tabで4つインデント
 autocmd BufNewFile,BufRead *.vue set filetype=html          " vueファイル
 autocmd BufNewFile,BufRead *.html nnoremap <C-q> :!vivaldi % 
+
+"""""""""""""""""""""""""
+"      インデント
+""""""""""""""""""""""""
+set autoindent          "改行時に前の行のインデントを計測
+set smartindent         "改行時に入力された行の末尾に合わせて次の行のインデントを増減する 
+set smarttab            "新しい行を作った時に高度な自動インデントを行う
+set expandtab           "タブ入力を複数の空白に置き換える 
+set tabstop=2           "タブを含むファイルを開いた際, タブを何文字の空白に変換するか
+set shiftwidth=2        "自動インデントで入る空白数
+set softtabstop=0       "キーボードから入るタブの数
+if has("autocmd")
+  "ファイルタイプの検索を有効にする
+  filetype plugin on
+  "ファイルタイプに合わせたインデントを利用
+  filetype indent on
+  "sw=softtabstop, sts=shiftwidth, ts=tabstop, et=expandtabの略
+  autocmd FileType c           setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType js          setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType python      setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType json        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType html        setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType css         setlocal sw=4 sts=4 ts=4 et
+  autocmd FileType javascript  setlocal sw=4 sts=4 ts=4 et
+endif
 
 
 " color scheme

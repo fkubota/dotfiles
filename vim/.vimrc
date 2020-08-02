@@ -128,6 +128,9 @@ endif
 
 " lightline
 set laststatus=2
+let g:lightline = {
+      \ 'colorscheme': 'seoul256'
+      \ }
 
 " caw.vim (コメントアウトトグル)
 nmap <C-_> <Plug>(caw:hatpos:toggle)

@@ -41,3 +41,6 @@ repo = 'arcticicestudio/nord-vim'
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
+
+[[plugins]]
+repo = 'airblade/vim-gitgutter'

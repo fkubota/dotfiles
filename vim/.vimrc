@@ -48,6 +48,7 @@ if dein#load_state(s:dein_dir)
   call dein#add('scrooloose/syntastic')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('tpope/vim-fugitive')
+  call dein#add('airblade/vim-gitgutter')
 
   " 設定終了
   call dein#end()

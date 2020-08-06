@@ -162,6 +162,8 @@ nnoremap sL <C-w>>
 nnoremap sH <C-w><
 nnoremap sK <C-w>+
 nnoremap sJ <C-w>-
+nnoremap s> <C-w>x<C-w>l
+nnoremap s< <C-w>h<C-w><C-x>
 
 " tab
 nnoremap st :<C-u>tabnew<CR>

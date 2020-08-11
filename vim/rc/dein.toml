@@ -44,3 +44,6 @@ repo = 'ryanoasis/vim-devicons'
 
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
+
+[[plugins]]
+repo = 'jmcantrell/vim-virtualenv'

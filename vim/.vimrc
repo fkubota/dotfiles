@@ -49,6 +49,8 @@ if dein#load_state(s:dein_dir)
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('tpope/vim-fugitive')
   call dein#add('airblade/vim-gitgutter')
+  call dein#add('jmcantrell/vim-virtualenv')
+  call dein#add('ervandew/supertab')
 
   " 設定終了
   call dein#end()

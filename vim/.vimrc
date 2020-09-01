@@ -156,6 +156,7 @@ endif
 nnoremap s <Nop>
 nnoremap s\| :<C-u>vs<CR><C-w>l
 nnoremap s- :<C-u>sp<CR><C-w>j
+nnoremap s= : <C-w>=
 nnoremap sj <C-w>j
 nnoremap sk <C-w>k
 nnoremap sl <C-w>l

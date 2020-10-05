@@ -111,7 +111,6 @@ endif
 
 " color scheme
 syntax on
-" colorscheme molokai
 colorscheme nord
 set t_Co=256
 set cursorline " 現在行番号に色をつける

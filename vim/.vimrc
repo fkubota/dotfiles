@@ -189,3 +189,6 @@ let g:ale_linters = { 'python': ['flake8'] }
 
 " preview markdown
 let g:preview_markdown_vertical = 1
+
+" tab補完
+let g:SuperTabDefaultCompletionType = "<c-n>"

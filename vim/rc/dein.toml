@@ -2,10 +2,11 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 
+# vimの見た目。ステータスバーとか。
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
-
+# カッコ補完
 [[plugins]]
 repo = 'cohama/lexima.vim'
 

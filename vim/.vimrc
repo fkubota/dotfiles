@@ -41,11 +41,8 @@ if dein#load_state(s:dein_dir)
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
   call dein#add('davidhalter/jedi-vim')
   call dein#add('cohama/lexima.vim')
-  call dein#add('scrooloose/syntastic')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('tpope/vim-fugitive')
   call dein#add('airblade/vim-gitgutter')

@@ -26,25 +26,31 @@ repo = 'Shougo/unite.vim.git'
 [[plugins]]
 repo = 'Shougo/vimfiler'
 
+# vimfilerにアイコンを付与
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+
 # 静的コードチェック
 [[plugins]]
 repo = 'w0rp/ale'
 
+# indent可視化
 [[plugins]]
 repo = 'Yggdroot/indentLine'
 
+# nord-theme
 [[plugins]]
 repo = 'arcticicestudio/nord-vim'
 
-[[plugins]]
-repo = 'ryanoasis/vim-devicons'
-
+# git
 [[plugins]]
 repo = 'airblade/vim-gitgutter'
 
+# virrualenvでも使えるように
 [[plugins]]
 repo = 'jmcantrell/vim-virtualenv'
 
+# コード補間
 [[plugins]]
 repo = "davidhalter/jedi-vim"
 on_ft = ['python']

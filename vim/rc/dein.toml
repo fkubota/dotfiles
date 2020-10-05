@@ -6,27 +6,29 @@ repo = 'Shougo/dein.vim'
 [[plugins]]
 repo = 'itchyny/lightline.vim'
 
-# カッコ補完
+# カッコ補間
 [[plugins]]
 repo = 'cohama/lexima.vim'
 
+# tab補間
 [[plugins]]
 repo = 'ervandew/supertab'
 
+# comment toggle
 [[plugins]]
 repo = 'tyru/caw.vim'
 
+# vimfilerで必要だから入れた
 [[plugins]]
 repo = 'Shougo/unite.vim.git'
 
+# 軽量ファイラー
 [[plugins]]
 repo = 'Shougo/vimfiler'
 
+# 静的コードチェック
 [[plugins]]
 repo = 'w0rp/ale'
-
-[[plugins]]
-repo = 'skanehira/preview-markdown.vim'
 
 [[plugins]]
 repo = 'Yggdroot/indentLine'

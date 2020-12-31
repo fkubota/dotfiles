@@ -66,18 +66,16 @@ call map(dein#check_clean(), "delete(v:val, 'rf')")
 " ===== basics =====
 set number " 行番号
 set hlsearch " 検索結果をハイライト
-" set shiftwidth=2 " インデント幅
 set tabstop=2 " tab
 set incsearch " インクリメンタルサーチ
 set pastetoggle=<F2> " set paste & set nopaste のトグル
 nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ
 inoremap <C-j> <C-x><C-f>
-" set autoindent " indent補完
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 %  
 autocmd BufNewFile,BufRead * nnoremap <C-l> :so ~/.vimrc  
-" autocmd BufNewFile,BufRead *.py set tabstop=4 " pythonのときだけ、tabで4つインデント
+autocmd BufNewFile,BufRead * nnoremap <C-t> :term ++curwin  
 autocmd BufNewFile,BufRead *.vue set filetype=html          " vueファイル
 autocmd BufNewFile,BufRead *.html nnoremap <C-q> :!vivaldi % 
 

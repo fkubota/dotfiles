@@ -45,9 +45,9 @@ if dein#load_state(s:dein_dir)
   call dein#add('cohama/lexima.vim')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('airblade/vim-gitgutter')
+  call dein#add('tpope/vim-fugitive')
   call dein#add('jmcantrell/vim-virtualenv')
   call dein#add('ervandew/supertab')
-  call dein#add('tpope/vim-fugitive')
 
   " 設定終了
   call dein#end()

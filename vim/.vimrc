@@ -75,7 +75,7 @@ inoremap <C-j> <C-x><C-f>
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 %  
 autocmd BufNewFile,BufRead * nnoremap <C-l> :so ~/.vimrc  
-autocmd BufNewFile,BufRead * nnoremap <C-t> :term ++curwin  
+autocmd BufNewFile,BufRead * nnoremap <C-t> :term ++curwin <CR> 
 autocmd BufNewFile,BufRead *.vue set filetype=html          " vueファイル
 autocmd BufNewFile,BufRead *.html nnoremap <C-q> :!vivaldi % 
 

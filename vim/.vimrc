@@ -41,13 +41,13 @@ if dein#load_state(s:dein_dir)
   call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   " Add or remove your plugins here:
-  call dein#add('davidhalter/jedi-vim')
   call dein#add('cohama/lexima.vim')
   call dein#add('ryanoasis/vim-devicons')
   call dein#add('airblade/vim-gitgutter')
   call dein#add('tpope/vim-fugitive')
   call dein#add('jmcantrell/vim-virtualenv')
   call dein#add('ervandew/supertab')
+  call dein#add('davidhalter/jedi-vim')
 
   " 設定終了
   call dein#end()
@@ -189,3 +189,9 @@ let g:preview_markdown_vertical = 1
 
 " tab補完
 let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" jedi-vim
+let g:jedi#popup_on_dot = 0       " dotで補間しない
+let g:jedi#popup_select_first = 0
+autocmd FileType python setlocal completeopt-=preview   " カッコ( で引数表示しない
+let g:jedi#completions_command = "<C-N>"   " ctrl + N で補間する

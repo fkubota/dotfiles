@@ -71,7 +71,7 @@ set incsearch " インクリメンタルサーチ
 set pastetoggle=<F2> " set paste & set nopaste のトグル
 nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ
-inoremap <C-j> <C-x><C-f>
+inoremap <C-o> <C-x><C-f>
 nnoremap <ESC><ESC> :nohlsearch<CR><ESC> " esc2回でハイライトを消す
 autocmd BufNewFile,BufRead *.py nnoremap <C-q> :!python3 %  
 autocmd BufNewFile,BufRead * nnoremap <C-l> :so ~/.vimrc  

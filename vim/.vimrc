@@ -125,11 +125,17 @@ if !has('gui_running') " これないと背景透明ならない
 endif
 
 
-" lightline
-set laststatus=2
-let g:lightline = {
-      \ 'colorscheme': 'seoul256'
-      \ }
+" " lightline
+" set laststatus=2
+" let g:lightline = {
+"      \ 'colorscheme': 'seoul256'
+"      \ }
+
+" statuslineの色の設定
+hi StatusLine ctermbg=10 ctermfg=black cterm=bold
+hi StatusLineNC ctermbg=66 ctermfg=black cterm=NONE
+hi StatusLineTerm ctermbg=10 ctermfg=black cterm=bold
+hi StatusLineTermNC ctermbg=66 ctermfg=black cterm=NONE
 
 " caw.vim (コメントアウトトグル)
 nmap <C-_> <Plug>(caw:hatpos:toggle)
@@ -195,3 +201,4 @@ let g:jedi#popup_on_dot = 0       " dotで補間しない
 let g:jedi#popup_select_first = 0
 autocmd FileType python setlocal completeopt-=preview   " カッコ( で引数表示しない
 let g:jedi#completions_command = "<C-N>"   " ctrl + N で補間する
+

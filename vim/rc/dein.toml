@@ -3,8 +3,8 @@
 repo = 'Shougo/dein.vim'
 
 # vimの見た目。ステータスバーとか。
-[[plugins]]
-repo = 'itchyny/lightline.vim'
+# [[plugins]]
+# repo = 'itchyny/lightline.vim'
 
 # カッコ補間
 [[plugins]]

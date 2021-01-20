@@ -131,10 +131,12 @@ endif
 "      \ 'colorscheme': 'seoul256'
 "      \ }
 
-" statuslineの色の設定
-hi StatusLine ctermbg=10 ctermfg=black cterm=bold
+" statusline
+set laststatus=2  "statusline を常に表示
+set statusline=%F
+hi StatusLine ctermbg=10 ctermfg=black cterm=NONE
 hi StatusLineNC ctermbg=66 ctermfg=black cterm=NONE
-hi StatusLineTerm ctermbg=10 ctermfg=black cterm=bold
+hi StatusLineTerm ctermbg=10 ctermfg=black cterm=NONE
 hi StatusLineTermNC ctermbg=66 ctermfg=black cterm=NONE
 
 " caw.vim (コメントアウトトグル)

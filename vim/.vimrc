@@ -203,4 +203,5 @@ let g:jedi#popup_on_dot = 0       " dotで補間しない
 let g:jedi#popup_select_first = 0
 autocmd FileType python setlocal completeopt-=preview   " カッコ( で引数表示しない
 let g:jedi#completions_command = "<C-N>"   " ctrl + N で補間する
+let g:jedi#show_call_signatures = 2 " 引数を表示しない
 

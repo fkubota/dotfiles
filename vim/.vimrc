@@ -69,6 +69,7 @@ set hlsearch " 検索結果をハイライト
 set tabstop=2 " tab
 set incsearch " インクリメンタルサーチ
 set pastetoggle=<F2> " set paste & set nopaste のトグル
+set backspace=indent,eol,start  " macでbackspaceが使えるように
 nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ
 inoremap <C-o> <C-x><C-f>

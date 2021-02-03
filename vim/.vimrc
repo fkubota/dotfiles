@@ -70,6 +70,7 @@ set tabstop=2 " tab
 set incsearch " インクリメンタルサーチ
 set pastetoggle=<F2> " set paste & set nopaste のトグル
 set backspace=indent,eol,start  " macでbackspaceが使えるように
+hi Visual term=reverse cterm=reverse
 nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ
 inoremap <C-o> <C-x><C-f>
@@ -140,6 +141,9 @@ hi StatusLineNC ctermbg=66 ctermfg=black cterm=NONE
 hi StatusLineTerm ctermbg=10 ctermfg=black cterm=NONE
 hi StatusLineTermNC ctermbg=66 ctermfg=black cterm=NONE
 
+" selected textの色
+hi Visual term=reverse cterm=reverse
+
 " caw.vim (コメントアウトトグル)
 nmap <C-_> <Plug>(caw:hatpos:toggle)
 vmap <C-_> <Plug>(caw:hatpos:toggle)
@@ -205,4 +209,3 @@ let g:jedi#popup_select_first = 0
 autocmd FileType python setlocal completeopt-=preview   " カッコ( で引数表示しない
 let g:jedi#completions_command = "<C-N>"   " ctrl + N で補間する
 let g:jedi#show_call_signatures = 2 " 引数を表示しない
-

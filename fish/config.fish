@@ -30,3 +30,6 @@ set -gx FZF_DEFAULT_OPTS "--height 80% --reverse --border"
 set -gx FZF_ALT_C_OPTS   "--preview 'tree -F -C {} | head -200'"
 # set -gx FZF_CTRL_T_OPTS "--preview 'bat --color \"always\" {}' --height 90%"
 
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/fumihiro.kubota/google-cloud-sdk/path.fish.inc' ]; . '/Users/fumihiro.kubota/google-cloud-sdk/path.fish.inc'; end

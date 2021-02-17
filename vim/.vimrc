@@ -196,6 +196,7 @@ let g:vimfiler_marked_file_icon = '✓'
 
 " ale
 let g:ale_linters = { 'python': ['flake8'] }
+let b:ale_python_flake8_options = '--max-line-length=120'
 
 " preview markdown
 let g:preview_markdown_vertical = 1

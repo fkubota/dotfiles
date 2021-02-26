@@ -80,6 +80,7 @@ autocmd BufNewFile,BufRead * nnoremap <C-l> :so ~/.vimrc
 autocmd BufNewFile,BufRead * nnoremap <C-t> :term ++curwin <CR> 
 autocmd BufNewFile,BufRead *.vue set filetype=html          " vueファイル
 autocmd BufNewFile,BufRead *.html nnoremap <C-q> :!vivaldi % 
+nmap sd :vert diffsplit 
 
 """""""""""""""""""""""""
 "      インデント

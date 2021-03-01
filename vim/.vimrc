@@ -199,12 +199,6 @@ let g:vimfiler_marked_file_icon = '✓'
 let g:ale_linters = { 'python': ['flake8'] }
 let b:ale_python_flake8_options = '--max-line-length=120'
 
-" preview markdown
-let g:preview_markdown_vertical = 1
-
-" tab補完
-let g:SuperTabDefaultCompletionType = "<c-n>"
-
 " jedi-vim
 let g:jedi#popup_on_dot = 0       " dotで補間しない
 let g:jedi#popup_select_first = 0

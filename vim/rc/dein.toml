@@ -11,8 +11,8 @@ repo = 'Shougo/dein.vim'
 repo = 'cohama/lexima.vim'
 
 # tab補間
-[[plugins]]
-repo = 'ervandew/supertab'
+# [[plugins]]
+# repo = 'ervandew/supertab'
 
 # comment toggle
 [[plugins]]

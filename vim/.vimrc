@@ -70,6 +70,7 @@ set tabstop=2 " tab
 set incsearch " インクリメンタルサーチ
 set pastetoggle=<F2> " set paste & set nopaste のトグル
 set backspace=indent,eol,start  " macでbackspaceが使えるように
+set wildmenu
 hi Visual term=reverse cterm=reverse
 nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ

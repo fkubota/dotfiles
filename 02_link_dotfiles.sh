@@ -11,5 +11,6 @@ ln -sf ~/Git/dotfiles/tmux/.tmux.conf ~/.tmux.conf
 # fish
 mkdir -p ~/.config/fish/functions
 ln -sf ~/Git/dotfiles/fish/config.fish ~/.config/fish/config.fish
+ln -sf ~/Git/dotfiles/fish/config-osx.fish ~/.config/fish/config-osx.fish
 ln -sf ~/Git/dotfiles/fish/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish
 

@@ -40,3 +40,11 @@ end
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/fumihiro.kubota/google-cloud-sdk/path.fish.inc' ]; . '/Users/fumihiro.kubota/google-cloud-sdk/path.fish.inc'; end
+
+# osx or linux
+switch (uname)
+  case Darwin
+    source (dirname (status --current-filename))/config-osx.fish
+	case Linux
+    # Do nothing
+end

@@ -9,9 +9,8 @@ sh ~/installer.sh ~/.cache
 pip3 install flake8 --user
 
 # tmux
-mkdir -p /home/fkubota/.tmux/theme/
+# mkdir -p fkubota/.tmux/theme/
 git clone https://github.com/arcticicestudio/nord-tmux.git ~/.tmux/themes/nord-tmux
-
 
 # ::シンボリックリンク::
 DOT_DIR="$HOME/Git/dotfiles"
@@ -21,22 +20,7 @@ has() {
 }
 
 if [ ! -d ${DOT_DIR} ]; then
-    if has "git"; then
-        git clone https://github.com/fkubota/dotfiles.git ${DOT_DIR}
-    elif has "curl" || has "wget"; then
-        TARBALL="https://github.com/fkubota/dotfiles/archive/master.tar.gz"
-        if has "curl"; then
-            curl -L ${TARBALL} -o master.tar.gz
-        else
-            wget ${TARBALL}
-        fi
-        tar -zxvf master.tar.gz
-        rm -f master.tar.gz
-        mv -f dotfiles-master "${DOT_DIR}"
-    else
-        echo "curl or wget or git required"
-        exit 1
-    fi
+    git clone https://github.com/fkubota/dotfiles.git ${DOT_DIR}
 
     cd ${DOT_DIR}
     for f in *;

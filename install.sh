@@ -33,8 +33,8 @@ if [ ! -d ${DOT_DIR} ]; then
         [[ "$f" == "install.sh" ]] && continue
         [[ "$f" == "LICENSE" ]] && continue
 
-        ln -snf $DOT_DIR/"$f" $HOME/"$f"
-        echo "Installed $f"
+        ln -snf $DOT_DIR/"$f" $HOME/".$f"
+        echo "Installed .$f"
     done
 else
     echo "dotfiles already exists"

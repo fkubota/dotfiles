@@ -1,7 +1,9 @@
 # dotfiles
 
 ## ユートピアの作り方
-```bash -c "$(curl -fsSL https://raw.githubusercontent.com/fkubota/dotfiles/master/install.sh)"```
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/fkubota/dotfiles/master/install.sh)"
+```
 
 
 ## info

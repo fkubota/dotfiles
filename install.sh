@@ -20,7 +20,8 @@ has() {
 }
 
 if [ ! -d ${DOT_DIR} ]; then
-    git clone https://github.com/fkubota/dotfiles.git ${DOT_DIR}
+    # git clone https://github.com/fkubota/dotfiles.git ${DOT_DIR}
+		git clone git@github.com:fkubota/dotfiles.git ${DOT_DIR}
 
     cd ${DOT_DIR}
     for f in *;
@@ -37,7 +38,7 @@ if [ ! -d ${DOT_DIR} ]; then
         echo "Installed $HOME/.$f"
     done
 		mkdir $HOME/.config
-    ln -sf "${DOT_DIR}/config/fish" "$HOME/.config/."
+    ln -sf "${DOT_DIR}/config/fish" "$HOME/.config/fish"
 else
     echo "dotfiles already exists"
     exit 1

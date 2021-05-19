@@ -1,4 +1,5 @@
 #!/bin/bash
+cat figlet_text.txt
 
 # ::setup::
 # dein のインストール

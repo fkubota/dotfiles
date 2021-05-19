@@ -5,6 +5,7 @@
 
 
 ## info
+- https2ssh: `git remote set-url origin git@github.com:fkubota/dotfiles.git`
 - 参考サイト
 	- ditfilesについて: https://qiita.com/mira010/items/927f996b278a8157f751
 	- ワンライナー: https://kisqragi.hatenablog.com/entry/2020/02/17/224129

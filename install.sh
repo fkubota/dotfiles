@@ -31,6 +31,7 @@ if [ ! -d ${DOT_DIR} ]; then
         [[ "$f" == "README.md" ]] && continue
         [[ "$f" == "install.sh" ]] && continue
         [[ "$f" == "LICENSE" ]] && continue
+        [[ "$f" == "config" ]] && continue
 
         ln -snf $DOT_DIR/"$f" $HOME/".$f"
         echo "Installed $HOME/.$f"

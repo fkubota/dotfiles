@@ -37,7 +37,7 @@ if [ ! -d ${DOT_DIR} ]; then
         echo "Installed $HOME/.$f"
     done
 		mkdir $HOME/.config
-    ln -sf "${DOT_DIR}/config/fish" "$HOME/.config/fish"
+    ln -sf "${DOT_DIR}/config/fish" "$HOME/.config/."
 else
     echo "dotfiles already exists"
     exit 1

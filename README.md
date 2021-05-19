@@ -1,8 +1,10 @@
 # dotfiles
 
-ユートピアの作り方
-- ```bash -c "$(curl -fsSL https://raw.githubusercontent.com/fkubota/dotfiles/master/install.sh)"```
+## ユートピアの作り方
+```bash -c "$(curl -fsSL https://raw.githubusercontent.com/fkubota/dotfiles/master/install.sh)"```
 
+
+## info
 - 参考サイト
 	- ditfilesについて: https://qiita.com/mira010/items/927f996b278a8157f751
 	- ワンライナー: https://kisqragi.hatenablog.com/entry/2020/02/17/224129

@@ -15,31 +15,19 @@ git clone https://github.com/arcticicestudio/nord-tmux.git ~/.tmux/themes/nord-t
 # ::シンボリックリンク::
 DOT_DIR="$HOME/Git/dotfiles"
 
-has() {
-    type "$1" > /dev/null 2>&1
-}
+# clone
+git clone git@github.com:fkubota/dotfiles.git ${DOT_DIR}
 
-if [ ! -d ${DOT_DIR} ]; then
-    # git clone https://github.com/fkubota/dotfiles.git ${DOT_DIR}
-		git clone git@github.com:fkubota/dotfiles.git ${DOT_DIR}
+# vim
+ln -sf ~/Git/dotfiles/vim/.vimrc ~/.vimrc
+ln -sf ~/Git/dotfiles/vim/rc/dein.toml ~/.vim/rc/dein.toml
+ln -sf ~/Git/dotfiles/vim/rc/dein_lazy.toml ~/.vim/rc/dein_lazy.toml
 
-    cd ${DOT_DIR}
-    for f in *;
-    do
-        [[ "$f" == ".git" ]] && continue
-        [[ "$f" == ".gitignore" ]] && continue
-        [[ "$f" == ".DS_Store" ]] && continue
-        [[ "$f" == "README.md" ]] && continue
-        [[ "$f" == "install.sh" ]] && continue
-        [[ "$f" == "LICENSE" ]] && continue
-        [[ "$f" == "config" ]] && continue
+# tmux
+ln -sf ~/Git/dotfiles/tmux/.tmux.conf ~/.tmux.conf
 
-        ln -snf $DOT_DIR/"$f" $HOME/".$f"
-        echo "Installed $HOME/.$f"
-    done
-		mkdir $HOME/.config
-    ln -sf "${DOT_DIR}/config/fish" "$HOME/.config/fish"
-else
-    echo "dotfiles already exists"
-    exit 1
-fi
+# fish
+mkdir -p ~/.config/fish/functions
+ln -sf ~/Git/dotfiles/fish/config.fish ~/.config/fish/config.fish
+ln -sf ~/Git/dotfiles/fish/config-osx.fish ~/.config/fish/config-osx.fish
+ln -sf ~/Git/dotfiles/fish/functions/fish_prompt.fish ~/.config/fish/functions/fish_prompt.fish

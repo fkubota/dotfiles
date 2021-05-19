@@ -19,7 +19,7 @@ DOT_DIR="$HOME/Git/dotfiles"
 git clone git@github.com:fkubota/dotfiles.git ${DOT_DIR}
 
 # vim
-mkdir -p ~/.vim/rc
+mkdir -p ~/.vim/rc/
 ln -sf ~/Git/dotfiles/vim/.vimrc ~/.vimrc
 ln -sf ~/Git/dotfiles/vim/rc/dein.toml ~/.vim/rc/dein.toml
 ln -sf ~/Git/dotfiles/vim/rc/dein_lazy.toml ~/.vim/rc/dein_lazy.toml

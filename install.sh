@@ -25,7 +25,6 @@ if [ ! -d ${DOT_DIR} ]; then
     cd ${DOT_DIR}
     for f in *;
     do
-	echo "$f"
         [[ "$f" == ".git" ]] && continue
         [[ "$f" == ".gitignore" ]] && continue
         [[ "$f" == ".DS_Store" ]] && continue

@@ -16,7 +16,8 @@ git clone https://github.com/arcticicestudio/nord-tmux.git ~/.tmux/themes/nord-t
 DOT_DIR="$HOME/Git/dotfiles"
 
 # clone
-git clone git@github.com:fkubota/dotfiles.git ${DOT_DIR}
+# git clone git@github.com:fkubota/dotfiles.git ${DOT_DIR}
+git clone https://github.com/fkubota/dotfiles.git ${DOT_DIR}
 
 # vim
 mkdir -p ~/.vim/rc/

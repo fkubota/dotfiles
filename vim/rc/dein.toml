@@ -64,3 +64,6 @@ on_ft = ['python']
 #   autocmd FileType python setlocal completeopt-=preview
 #   let g:jedi#completions_command = "<C-N>"
 # '''
+
+[[plugins]]
+repo = 'ctrlpvim/ctrlp.vim'

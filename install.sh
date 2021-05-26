@@ -1,5 +1,4 @@
 #!/bin/bash
-cat figlet_text.txt
 
 # ::setup::
 # dein のインストール
@@ -19,6 +18,7 @@ DOT_DIR="$HOME/Git/dotfiles"
 # clone
 # git clone git@github.com:fkubota/dotfiles.git ${DOT_DIR}
 git clone https://github.com/fkubota/dotfiles.git ${DOT_DIR}
+cat ${DOT_DIR}/figlet_text.txt
 
 # vim
 mkdir -p ~/.vim/rc/

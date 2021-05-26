@@ -211,3 +211,4 @@ let g:jedi#show_call_signatures = 2 " 引数を表示しない
 
 " ctrlp
 let g:ctrlp_max_height = 40
+let g:ctrlp_show_hidden = 1

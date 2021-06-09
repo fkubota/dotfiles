@@ -67,3 +67,6 @@ on_ft = ['python']
 
 [[plugins]]
 repo = 'ctrlpvim/ctrlp.vim'
+
+[[plugins]]
+repo = 'alvan/closetag.vim'

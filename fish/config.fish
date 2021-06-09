@@ -1,6 +1,11 @@
+# alias
 alias cl="xclip -in -sel clip"
 alias rl="readlink -f"
 alias lf="find (pwd) -name"
+alias '..'='cd ..'
+alias '...'='cd ../..'
+alias '....'='cd ../../..'
+alias '.....'='cd ../../../..'
 
 # color 
 set fish_color_command '#A0DDFF'

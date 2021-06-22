@@ -70,3 +70,6 @@ repo = 'ctrlpvim/ctrlp.vim'
 
 [[plugins]]
 repo = 'alvan/closetag.vim'
+
+[[plugins]]
+repo = 'posva/vim-vue'

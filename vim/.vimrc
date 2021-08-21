@@ -47,9 +47,15 @@ if dein#load_state(s:dein_dir)
   call dein#add('tpope/vim-fugitive')
   call dein#add('jmcantrell/vim-virtualenv')
   call dein#add('ervandew/supertab')
-  call dein#add('davidhalter/jedi-vim')
+  " call dein#add('davidhalter/jedi-vim')
+	" call dein#add('w0rp/ale')
   call dein#add('ctrlpvim/ctrlp.vim')
   call dein#add('posva/vim-vue')
+	call dein#add('arcticicestudio/nord-vim')
+	call dein#add('prabirshrestha/vim-lsp')
+	call dein#add('mattn/vim-lsp-settings')
+	call dein#add('prabirshrestha/asyncomplete.vim')
+	call dein#add('prabirshrestha/asyncomplete-lsp.vim')
 
   " 設定終了
   call dein#end()
@@ -199,18 +205,33 @@ let g:vimfiler_tree_opened_icon = '▾'
 let g:vimfiler_tree_closed_icon = '▸'
 let g:vimfiler_marked_file_icon = '✓'
 
-" ale
-let g:ale_linters = { 'python': ['flake8'] }
-let b:ale_python_flake8_options = '--max-line-length=120'
-
-" jedi-vim
-let g:jedi#popup_on_dot = 0       " dotで補間しない
-let g:jedi#popup_select_first = 0
-autocmd FileType python setlocal completeopt-=preview   " カッコ( で引数表示しない
-let g:jedi#completions_command = "<C-N>"   " ctrl + N で補間する
-let g:jedi#show_call_signatures = 2 " 引数を表示しない
-
 " ctrlp
 let g:ctrlp_max_height = 40
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window = 'order:ttb'
+
+
+" vim-lsp[basic]
+let g:lsp_diagnostics_echo_cursor = 1
+nnoremap K :<C-u>LspHover<CR>
+nnoremap <LocalLeader>s :<C-u>LspDocumentFormat<CR> " テキスト整形
+nnoremap gd :<C-u>LspDefinition<CR>
+nnoremap gD :<C-u>LspReferences<CR>
+nnoremap gs :<C-u>LspDocumentSymbol<CR>
+nnoremap gS :<C-u>LspWorkspaceSymbol<CR>
+inoremap <buffer> <expr><c-e> lsp#scroll(+4)
+inoremap <buffer> <expr><c-y> lsp#scroll(-4)
+
+" vim-lsp[python]
+" flake8のmax-line-length = 120 は ~/.config/flake8 に↓をかけばよい
+" [flake8]
+" max-line-length = 120 
+let g:lsp_settings = {
+\   'pyls-all': {
+\     'workspace_config': {
+\       'pyls': {
+\         'configurationSources': ['flake8'],
+\ 					},
+\       },
+\     },
+\}

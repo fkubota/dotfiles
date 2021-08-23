@@ -221,8 +221,8 @@ nnoremap gs :<C-u>LspDocumentSymbol<CR>
 nnoremap gS :<C-u>LspWorkspaceSymbol<CR>
 " inoremap <buffer> <expr><c-e> lsp#scroll(+4)
 " inoremap <buffer> <expr><c-y> lsp#scroll(-4)
-autocmd User lsp_float_opened inoremap <buffer> <expr><C-e> lsp#scroll(+2)
-autocmd User lsp_float_opened inoremap <buffer> <expr><C-y> lsp#scroll(-2)
+autocmd User lsp_float_opened inoremap <buffer> <expr><down> lsp#scroll(+2)
+autocmd User lsp_float_opened inoremap <buffer> <expr><up> lsp#scroll(-2)
 autocmd User lsp_float_opened nnoremap <buffer> <expr><down> lsp#scroll(+2)
 autocmd User lsp_float_opened nnoremap <buffer> <expr><up> lsp#scroll(-2)
 

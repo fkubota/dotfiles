@@ -1,0 +1,19 @@
+[user]
+	email = rkkubotay@gmail.com
+	name = fkubota
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+[core]
+	excludesFile = /Users/fumihiro.kubota/.gitignore_global
+[merge]
+	tool = vimdiff
+	conflictstyle = diff3
+[mergetool]
+	prompt = false

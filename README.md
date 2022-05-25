@@ -15,3 +15,12 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/fkubota/dotfiles/master/
 - vim-plugin は dein.vim で管理
   - dein.toml, dein_lazy.toml については
     > https://qiita.com/sugamondo/items/fcaf210ca86d65bcaca8
+
+
+# fzf.fish のインストール
+ref: https://github.com/PatrickF1/fzf.fish
+- Mac
+	1. brew install fisher
+  2. brew install fd
+  3. brew install bat
+  4. fisher install PatrickF1/fzf.fish

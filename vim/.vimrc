@@ -56,6 +56,7 @@ if dein#load_state(s:dein_dir)
 	call dein#add('mattn/vim-lsp-settings')
 	call dein#add('prabirshrestha/asyncomplete.vim')
 	call dein#add('prabirshrestha/asyncomplete-lsp.vim')
+	call dein#add('vim-jp/vimdoc-ja')
 
   " 設定終了
   call dein#end()

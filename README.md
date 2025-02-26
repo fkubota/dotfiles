@@ -24,3 +24,13 @@ ref: https://github.com/PatrickF1/fzf.fish
   2. brew install fd
   3. brew install bat
   4. fisher install PatrickF1/fzf.fish
+
+
+# tmux
+- powerline用のフォントが必要になるのでインストール。
+  - git clone https://github.com/powerline/fonts.git --depth=1
+  - cd fonts
+  - ./install.sh
+  - cd ..
+  - rm -rf fonts
+- その後、利用するターミナルでそのフォントを指定する。

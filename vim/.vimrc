@@ -122,6 +122,9 @@ endif
 
 
 " color scheme
+" if has("termguicolors")
+"				set termguicolors
+" endif
 syntax on
 colorscheme nord
 set t_Co=256

@@ -29,17 +29,23 @@ function fish_prompt
   # Output the prompt, left to right
 
   # Add a newline before new prompts
-  #echo -e ''
+  echo -e ''
 
   # Display [venvname] if in a virtualenv
-  if set -q VIRTUAL_ENV
-      echo -n -s (set_color -b cyan black) '[' (basename "$VIRTUAL_ENV") ']' $normal ' '
-  end
+  # if set -q VIRTUAL_ENV
+  #     echo -n -s (set_color -b cyan black) '[' (basename "$VIRTUAL_ENV") ']' $normal ' '
+  # end
+
 
   # Terminate with a nice prompt char
   echo -e ''
   # Display current time
-  echo -e -s $gray '[' $green (whoami) '@' (hostname) $gray'] ' $normal
+  echo -e -s -n $gray '[' $green (whoami) '@' (hostname) $gray'] ' $normal
+	# Display [venvname] if in a virtualenv
+	if set -q VIRTUAL_ENV
+			echo -s -n (set_color -b black brgrey) '(' (basename "$VIRTUAL_ENV") ')' $normal ' '
+	end
+	echo -e ''
   # Print pwd or full path
   echo -n $cwd $normal
 

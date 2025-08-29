@@ -82,6 +82,7 @@ set backspace=indent,eol,start  " macでbackspaceが使えるように
 set wildmenu
 " set clipboard+=unnamed  " ヤンク、プットでクリップボードが使えるようになる
 hi Visual term=reverse cterm=reverse
+inoremap <silent> jj <ESC>
 nnoremap <C-k> :cprevious<CR>   " quickfix前へ
 nnoremap <C-j> :cnext<CR>       " quickfix次へ
 inoremap <C-o> <C-x><C-f>

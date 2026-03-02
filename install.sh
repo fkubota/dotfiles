@@ -29,6 +29,17 @@ ln -sf ${DOT_DIR}/vim/rc/dein_lazy.toml ~/.vim/rc/dein_lazy.toml
 # tmux
 ln -sf ${DOT_DIR}/tmux/.tmux.conf ~/.tmux.conf
 
+# git
+ln -sf ${DOT_DIR}/git/.gitignore_global ~/.gitignore_global
+git config --global core.excludesfile ~/.gitignore_global
+
+# claude
+mkdir -p ~/.claude
+rm -rf ~/.claude/skills
+rm -rf ~/.claude/commands
+ln -sfn ${DOT_DIR}/claude/skills ~/.claude/skills
+ln -sfn ${DOT_DIR}/claude/commands ~/.claude/commands
+
 # fish
 mkdir -p ~/.config/fish/functions
 ln -sf ${DOT_DIR}/fish/config.fish ~/.config/fish/config.fish

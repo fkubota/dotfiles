@@ -7,6 +7,7 @@ alias '...'='cd ../..'
 alias '....'='cd ../../..'
 alias '.....'='cd ../../../..'
 alias d='cd ~/Git'
+alias w='cd ~/work'
 
 # color 
 set fish_color_command '#A0DDFF'

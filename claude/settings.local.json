@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Edit(~/work/hanzo-ask/**)",
+      "Write(~/work/hanzo-ask/**)"
+    ]
+  }
+}

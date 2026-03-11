@@ -39,6 +39,7 @@ rm -rf ~/.claude/skills
 rm -rf ~/.claude/commands
 ln -sfn ${DOT_DIR}/claude/skills ~/.claude/skills
 ln -sfn ${DOT_DIR}/claude/commands ~/.claude/commands
+ln -sf ${DOT_DIR}/claude/settings.local.json ~/.claude/settings.local.json
 
 # fish
 mkdir -p ~/.config/fish/functions

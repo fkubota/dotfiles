@@ -16,38 +16,51 @@ Staging環境のPostgreSQLデータベースに対してクエリを実行する
 
 ## 実行手順
 
-### 1. SSHトンネル接続
+### 1. AWS SSO ログイン
 
-まず、SSHトンネルをバックグラウンドで起動する。
+```bash
+aws sso login --profile goals-hanzo
+```
+
+### 2. SSHトンネル確認・起動
+
+```bash
+lsof -iTCP:5432 -sTCP:LISTEN
+```
+
+未接続の場合はバックグラウンドで起動する：
 
 ```bash
 ssh -f -N \
     -L 5432:database.staging.internal.foodies.jp:5432 \
-    -i ~/.ssh/minedup.pem \
-    -p 22 ec2-user@staging.bastion.hanzo.cloud
+    ssm-staging
 ```
 
-**オプション説明:**
-- `-f`: バックグラウンドで実行
-- `-N`: リモートコマンドを実行しない（ポートフォワーディング専用）
+### 3. パスワードの確認
 
-### 2. パスワードの確認
+ユーザーにStagingデータベースのパスワードを確認する（「DBのパスワードを教えてください（いつものやつです）」）。
 
-ユーザーにStagingデータベースのパスワードを確認する。
-
-### 3. 接続確認
+### 4. 接続確認
 
 ```bash
 PGPASSWORD=<パスワード> psql -h localhost -p 5432 -U table_plus -d foodies -c "SELECT 1;"
 ```
 
-### 4. クエリ実行
+#### トラブルシューティング
+
+| エラー | 対処 |
+|--------|------|
+| SSO認証エラー | `aws sso login --profile goals-hanzo` を再実行 |
+| SSHトンネル接続失敗 | AWS SSOの有効期限切れの可能性。SSO再ログイン後にリトライ |
+| psql接続失敗 | トンネルが起動しているか `lsof -iTCP:5432` で確認 |
+
+### 5. クエリ実行
 
 ```bash
 PGPASSWORD=<パスワード> psql -h localhost -p 5432 -U table_plus -d foodies -c "<SQL文>"
 ```
 
-### 例
+### 例（手順 5）
 
 ```bash
 # テーブル一覧

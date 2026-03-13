@@ -3,3 +3,4 @@
 \.vim/dein/.cache
 \.vim/dein/state_vim.vim
 *.swp
+secrets.fish

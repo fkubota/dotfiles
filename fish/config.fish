@@ -70,3 +70,7 @@ else
 end
 # <<< conda initialize <<<
 
+# Secrets (gitignore対象)
+if test -f ~/.config/fish/secrets.fish
+    source ~/.config/fish/secrets.fish
+end

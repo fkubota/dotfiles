@@ -1,47 +1,16 @@
 {
-  "permissions": {
-    "allow": [
-      "Read",
-      "Glob",
-      "Grep",
-      "Agent",
-      "WebSearch",
-      "WebFetch",
-      "Bash(python3:*)",
-      "Bash(git log:*)",
-      "Bash(git diff:*)",
-      "Bash(git status)",
-      "Bash(git show:*)",
-      "Bash(git branch:*)",
-      "Bash(ls:*)",
-      "Bash(find:*)",
-      "Bash(cat:*)",
-      "Bash(head:*)",
-      "Bash(tail:*)",
-      "Bash(wc:*)",
-      "Bash(echo:*)",
-      "Bash(which:*)",
-      "Bash(pwd)",
-      "Bash(env:*)",
-      "Bash(ps:*)",
-      "Bash(df:*)",
-      "Bash(du:*)",
-      "Bash(jq:*)",
-      "Bash(sort:*)",
-      "Bash(uniq:*)",
-      "Bash(cut:*)",
-      "Bash(ssh:*)",
-      "Bash(gh:*)",
-      "mcp__serena__find_symbol",
-      "mcp__serena__get_symbols_overview",
-      "mcp__serena__find_file",
-      "mcp__serena__find_referencing_symbols",
-      "mcp__serena__search_for_pattern",
-      "mcp__serena__list_dir",
-      "mcp__serena__list_memories",
-      "mcp__serena__read_memory",
-      "Edit(~/work/hanzo-ask/**)",
-      "Write(~/work/hanzo-ask/**)"
+  "hooks": {
+    "Notification": [
+      {
+        "matcher": "permission_prompt",
+        "hooks": [{ "type": "command", "command": "~/.claude/hooks/notify.sh" }]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [{ "type": "command", "command": "~/.claude/hooks/notify.sh" }]
+      }
     ]
   }
 }

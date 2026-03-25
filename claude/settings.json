@@ -3,14 +3,26 @@
     "Notification": [
       {
         "matcher": "permission_prompt",
-        "hooks": [{ "type": "command", "command": "~/.claude/hooks/notify.sh" }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/notify.sh"
+          }
+        ]
       }
     ],
     "Stop": [
       {
         "matcher": "",
-        "hooks": [{ "type": "command", "command": "~/.claude/hooks/notify.sh" }]
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/notify.sh"
+          }
+        ]
       }
     ]
-  }
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "model": "opus"
 }

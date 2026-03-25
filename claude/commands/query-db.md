@@ -1,8 +1,8 @@
-# Staging DB クエリ実行コマンド
+# DB クエリ実行コマンド
 
 ## 目的
 
-Staging環境のPostgreSQLデータベースに対してクエリを実行する。
+staging / hotfix / production 環境のPostgreSQLデータベースに対してクエリを実行する。
 
 ## 接続情報
 
@@ -16,31 +16,60 @@ Staging環境のPostgreSQLデータベースに対してクエリを実行する
 
 ## 実行手順
 
-### 1. AWS SSO ログイン
+### 1. 環境の選択
+
+ユーザーに接続する環境を確認する：
+
+> 「どの環境に接続しますか？（staging / hotfix / production）」
+
+### 2. AWS SSO ログイン
 
 ```bash
 aws sso login --profile goals-hanzo
 ```
 
-### 2. SSHトンネル確認・起動
+### 3. SSHトンネル確認・起動
 
 ```bash
 lsof -iTCP:5432 -sTCP:LISTEN
 ```
 
-未接続の場合はバックグラウンドで起動する：
+未接続の場合はバックグラウンドで起動する。環境に応じて以下のコマンドを使用：
+
+#### staging
 
 ```bash
 ssh -f -N \
+    -o ServerAliveInterval=60 \
+    -o ServerAliveCountMax=3 \
     -L 5432:database.staging.internal.foodies.jp:5432 \
-    ssm-staging
+    -i ~/.ssh/minedup.pem \
+    -p 22 ec2-user@staging.bastion.hanzo.cloud
 ```
 
-### 3. パスワードの確認
+#### hotfix
 
-ユーザーにStagingデータベースのパスワードを確認する（「DBのパスワードを教えてください（いつものやつです）」）。
+```bash
+ssh -f -N \
+    -L 5432:database.hotfix.internal.foodies.jp:5432 \
+    -i ~/.ssh/minedup.pem \
+    -p 22 ec2-user@hotfix.bastion.hanzo.cloud
+```
 
-### 4. 接続確認
+#### production
+
+```bash
+ssh -f -N \
+    -L 5432:readerdatabase.production.internal.foodies.jp:5432 \
+    -i ~/.ssh/minedup.pem \
+    -p 22 ec2-user@production.bastion.hanzo.cloud
+```
+
+### 4. パスワードの確認
+
+ユーザーにデータベースのパスワードを確認する（「DBのパスワードを教えてください（いつものやつです）」）。
+
+### 5. 接続確認
 
 ```bash
 PGPASSWORD=<パスワード> psql -h localhost -p 5432 -U table_plus -d foodies -c "SELECT 1;"
@@ -54,13 +83,13 @@ PGPASSWORD=<パスワード> psql -h localhost -p 5432 -U table_plus -d foodies 
 | SSHトンネル接続失敗 | AWS SSOの有効期限切れの可能性。SSO再ログイン後にリトライ |
 | psql接続失敗 | トンネルが起動しているか `lsof -iTCP:5432` で確認 |
 
-### 5. クエリ実行
+### 6. クエリ実行
 
 ```bash
 PGPASSWORD=<パスワード> psql -h localhost -p 5432 -U table_plus -d foodies -c "<SQL文>"
 ```
 
-### 例（手順 5）
+### 例（手順 6）
 
 ```bash
 # テーブル一覧
@@ -145,7 +174,7 @@ LEFT JOIN orders ON s.id = orders.shop_id;
 
 ## 注意事項
 
-- **読み取り専用**: Staging環境は読み取り専用権限のみ
-- **本番環境ではない**: テストデータが含まれている可能性あり
+- **読み取り専用**: 各環境は読み取り専用権限のみ
+- **productionは本番データ**: 実際のユーザーデータが含まれているため慎重に扱うこと
 - **ポート競合**: ローカルでPostgreSQLが起動している場合は停止するか、別ポートを使用すること
-- **重いクエリに注意**: LIMITなしの大規模JOINはStaging環境に負荷をかけるため避けること
+- **重いクエリに注意**: LIMITなしの大規模JOINは環境に負荷をかけるため避けること

@@ -6,7 +6,15 @@
 # - Git branch and dirty state (if inside a git repo)
 
 function _git_branch_name
-  echo (command git symbolic-ref HEAD 2>/dev/null | sed -e 's|^refs/heads/||')
+  set -l branch (command git symbolic-ref HEAD 2>/dev/null | sed -e 's|^refs/heads/||')
+  if test -z "$branch"
+    # detached HEAD: show short commit hash
+    set branch (command git rev-parse --short HEAD 2>/dev/null)
+    if test -n "$branch"
+      set branch "detached:$branch"
+    end
+  end
+  echo $branch
 end
 
 function _git_is_dirty

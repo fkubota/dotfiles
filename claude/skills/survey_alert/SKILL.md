@@ -1,3 +1,9 @@
+---
+name: survey_alert
+description: RedashのアラートURLを受け取り、ダッシュボードクエリで原因を調査してSlack用レポートを生成する
+disable-model-invocation: true
+---
+
 # アラート調査コマンド
 
 ## 注意事項

@@ -1,6 +1,7 @@
 ---
 name: sql-format
 description: SQLを書くとき・例示するときのフォーマットルール。SQL作成、クエリ作成、SQLフォーマットに関連するタスクで参照。
+user-invocable: false
 ---
 
 # SQL Format Rules

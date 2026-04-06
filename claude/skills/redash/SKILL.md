@@ -1,6 +1,7 @@
 ---
 name: redash
 description: Redash APIを使ってクエリ情報・結果を取得・分析する。ユーザーがRedashのURLを貼った場合、「Redashを確認して」「このクエリを見て」などRedashへのアクセスが必要な場面で自動的に使用する。
+user-invocable: false
 ---
 
 # Redash アクセススキル

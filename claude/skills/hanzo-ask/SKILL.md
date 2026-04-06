@@ -1,3 +1,9 @@
+---
+name: hanzo-ask
+description: hanzoプロダクトに関する質問に、蓄積済み知見・ドキュメント・ソースコード・DBを優先順位順に参照して素早く回答する
+disable-model-invocation: true
+---
+
 # hanzo-ask コマンド
 
 hanzo プロダクトに関する質問に、素早く正確に回答するためのコマンド。

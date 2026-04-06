@@ -1,3 +1,9 @@
+---
+name: session-summary-start
+description: 直近のセッションサマリーを~/sandpit/から読み込み、前回の作業を継続する
+disable-model-invocation: true
+---
+
 # セッションサマリー読み込みコマンド
 
 ## 目的

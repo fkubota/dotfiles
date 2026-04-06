@@ -1,3 +1,9 @@
+---
+name: session-summary-save
+description: 現在のセッション内容を~/sandpit/YYYYMMDD/に保存し、次回セッションで継続できるようにする
+disable-model-invocation: true
+---
+
 # セッションサマリー保存コマンド
 
 ## 目的

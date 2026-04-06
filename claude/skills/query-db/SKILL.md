@@ -1,3 +1,9 @@
+---
+name: query-db
+description: staging/hotfix/production環境のPostgreSQLにSSHトンネル経由で読み取り専用クエリを実行する
+disable-model-invocation: true
+---
+
 # DB クエリ実行コマンド
 
 ## 目的

@@ -1,0 +1,296 @@
+<!--
+  Aurelius Dashboard Template — Timeline Style
+  generate_dashboard.py がMarkdownデータを読み取り、プレースホルダーを置換して生成する
+-->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>AURELIUS — {{DATE}}</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Helvetica Neue", "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+    background: #fff;
+    color: #222;
+    line-height: 1.6;
+  }
+
+  .header {
+    padding: 32px 48px 24px;
+    border-bottom: 1px solid #eee;
+  }
+  .header-top {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+  .header-brand {
+    font-size: 11px;
+    letter-spacing: 5px;
+    color: #bbb;
+    font-weight: 700;
+  }
+  .header-date {
+    font-size: 12px;
+    color: #aaa;
+    margin-left: auto;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 48px 60px;
+  }
+
+  .section-title {
+    font-size: 12px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #aaa;
+    font-weight: 700;
+    margin-bottom: 16px;
+    margin-top: 40px;
+  }
+  .section-title:first-child { margin-top: 0; }
+
+  /* Project Card */
+  .project-card {
+    margin-bottom: 56px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid #eee;
+  }
+  .project-card:last-child { border-bottom: none; }
+
+  .pj-header {
+    margin-bottom: 24px;
+  }
+  .pj-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .pj-goal {
+    font-size: 13px;
+    color: #777;
+  }
+
+  /* Progress bars */
+  .progress-section {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 8px;
+  }
+  .progress-block {
+    flex: 1;
+  }
+  .progress-block-label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .pbar-track {
+    height: 6px;
+    background: #f0f0f0;
+    border-radius: 3px;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .pbar-fill {
+    height: 100%;
+    border-radius: 3px;
+  }
+  .pbar-dates {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: #aaa;
+  }
+  .pbar-dates .now { color: #e44; font-weight: 700; }
+  .pbar-pct { font-size: 12px; color: #888; font-weight: 400; }
+  .pbar-pct.overdue { color: #e44; }
+
+  /* Gantt chart */
+  .gantt {
+    position: relative;
+    margin: 0 0 48px;
+  }
+  .gantt-header {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 6px;
+    margin-bottom: 2px;
+  }
+  .gantt-label-col {
+    width: 160px;
+    flex-shrink: 0;
+    font-size: 11px;
+    color: #aaa;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+  .gantt-chart-col {
+    flex: 1;
+    position: relative;
+  }
+  .gantt-dates {
+    display: flex;
+    justify-content: space-between;
+    font-size: 9px;
+    color: #ccc;
+    padding: 0;
+  }
+  .gantt-row {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    border-bottom: 1px solid #f8f8f8;
+  }
+  .gantt-row-label {
+    width: 160px;
+    flex-shrink: 0;
+    font-size: 13px;
+    font-weight: 500;
+    padding-right: 16px;
+  }
+  .gantt-row-bar-area {
+    flex: 1;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .gantt-bar {
+    position: absolute;
+    height: 22px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 11px;
+    color: #fff;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .gantt-bar.c0 { background: #52b788; }
+  .gantt-bar.c1 { background: #4a90d9; }
+  .gantt-bar.c2 { background: #b07dd6; }
+  .gantt-bar.c3 { background: #e09f4a; }
+  .gantt-bar.buffer { background: #e0e0e0; color: #999; }
+
+  .gantt-row-task {
+    height: 28px;
+  }
+  .gantt-task-label {
+    font-size: 11px;
+    color: #888;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .gantt-bar-task {
+    position: absolute;
+    height: 14px;
+    border-radius: 3px;
+    min-width: 8px;
+  }
+
+  .gantt-today-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e44;
+    opacity: 0.6;
+  }
+  .gantt-today-flag {
+    position: absolute;
+    top: -18px;
+    transform: translateX(-50%);
+    font-size: 10px;
+    color: #e44;
+    font-weight: 700;
+    z-index: 1;
+  }
+  .gantt-chart-col {
+    position: relative;
+  }
+
+  /* Today's goal highlight */
+  .today-section {
+    background: #fafafa;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 8px;
+  }
+  .today-label {
+    font-size: 11px;
+    color: #e44;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .today-goal {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  th {
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    color: #aaa;
+    padding: 6px 10px;
+    border-bottom: 1px solid #eee;
+  }
+  td {
+    padding: 8px 10px;
+    border-bottom: 1px solid #f5f5f5;
+    vertical-align: top;
+  }
+  .dot-done { color: #52b788; }
+  .dot-todo { color: #ddd; }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 80px 20px;
+    color: #aaa;
+    font-size: 14px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <span class="header-brand">AURELIUS</span>
+    <span class="header-date">{{DATE}} — {{PROJECT_COUNT}} projects</span>
+  </div>
+</div>
+
+<div class="container">
+  {{CARDS}}
+</div>
+
+<script>
+  if (!document.querySelector('.project-card')) {
+    document.querySelector('.container').innerHTML =
+      '<div class="empty-state">プロジェクトがまだありません<br><code>/aurelius new</code> で新規作成できます</div>';
+  }
+</script>
+</body>
+</html>

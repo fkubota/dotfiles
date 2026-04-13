@@ -18,6 +18,25 @@
           {
             "type": "command",
             "command": "~/.claude/hooks/notify.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-tab-done.sh"
+          },
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-tab-name.sh"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "~/.claude/hooks/tmux-tab-reset.sh"
           }
         ]
       }

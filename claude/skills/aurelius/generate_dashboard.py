@@ -55,7 +55,7 @@ def parse_plan(plan_path: Path) -> dict:
 
 def parse_tasks(tasks_path: Path) -> dict:
     text = tasks_path.read_text(encoding="utf-8")
-    tasks = {"cycle_name": "", "cycle_goal": "", "items": [], "backlog": []}
+    tasks = {"cycle_name": "", "cycle_goal": "", "items": [], "all_items": [], "backlog": []}
 
     m = re.search(r"## 現在のサイクル[:：]\s*(.+)", text)
     if m:
@@ -66,24 +66,26 @@ def parse_tasks(tasks_path: Path) -> dict:
         tasks["cycle_goal"] = m.group(1).strip()
 
     in_table = False
-    table_found = False
+    is_first_table = True
     for line in text.splitlines():
         if re.match(r"\|\s*日付\s*\|", line):
-            if table_found:
-                break  # 2つ目以降のテーブルは読まない（現サイクルのみ）
             in_table = True
-            table_found = True
             continue
         if in_table and line.startswith("|") and "---" not in line:
             cols = [c.strip() for c in line.split("|")[1:-1]]
             if len(cols) >= 3:
-                tasks["items"].append({
+                item = {
                     "date": cols[0],
                     "task": cols[1],
                     "done": "✅" in cols[2],
-                })
+                }
+                tasks["all_items"].append(item)
+                if is_first_table:
+                    tasks["items"].append(item)
         elif in_table and not line.startswith("|"):
             in_table = False
+            if is_first_table:
+                is_first_table = False
 
     in_backlog = False
     for line in text.splitlines():
@@ -187,19 +189,22 @@ def fmt_date_short(d: date) -> str:
     return f"{d.month}/{d.day}({WEEKDAYS[d.weekday()]})"
 
 
-def generate_gantt_dates(start: date, end: date) -> list:
-    """ガントチャートのヘッダー日付ラベルを生成（2日おき）"""
-    labels = []
-    total = (end - start).days
+def generate_gantt_dates(start: date, end: date) -> str:
+    """ガントチャートのヘッダー日付ラベルを生成（絶対位置配置）"""
+    total = (end - start).days or 1
     step = max(1, total // 14)
+    dates = []
     d = start
     while d <= end:
-        labels.append(f"<span>{fmt_date_short(d)}</span>")
+        dates.append(d)
         d += timedelta(days=step)
-    end_str = f"<span>{fmt_date_short(end)}</span>"
-    if labels[-1] != end_str:
-        labels.append(end_str)
-    return labels
+    if dates[-1] != end:
+        dates.append(end)
+    html = ""
+    for d in dates:
+        pct = (d - start).days / total * 100
+        html += f'<span style="position:absolute;left:{pct:.1f}%;transform:translateX(-50%);">{fmt_date_short(d)}</span>'
+    return html
 
 
 def generate_weekend_bands(start: date, end: date) -> str:
@@ -258,8 +263,11 @@ def generate_card_html(pj: dict, today: date) -> str:
     overall_note = f'{overall_pct}%' if days_left >= 0 else f'<span class="pbar-pct overdue">{abs(days_left)}日超過</span>'
     easy_note = f'{easy_pct}%' if easy_days_left >= 0 else f'<span class="pbar-pct overdue">{abs(easy_days_left)}日超過</span>'
 
-    easy_today_label = f"今日 {today_label} ＝ 楽勝〆" if easy_days_left == 0 else f"今日 {today_label}"
-    easy_right = "" if easy_days_left <= 0 else f"<span>{easy_label} 楽勝〆</span>"
+    easy_today_label = f"今日 {today_label} ＝ 余裕〆" if easy_days_left == 0 else f"今日 {today_label}"
+    easy_right = "" if easy_days_left <= 0 else f"<span>{easy_label} 余裕〆</span>"
+
+    # 余裕バーのトラック幅を全体に対する比率で計算
+    easy_track_pct = min(100, max(10, (easy_deadline - start).days / total_days * 100))
 
     progress_html = f"""
     <div class="progress-section">
@@ -273,9 +281,9 @@ def generate_card_html(pj: dict, today: date) -> str:
         </div>
       </div>
       <div class="progress-block">
-        <div class="progress-block-label">楽勝スケジュール <span class="pbar-pct">{easy_note}</span></div>
-        <div class="pbar-track"><div class="pbar-fill" style="width:{min(easy_pct, 100)}%; background:{easy_color};"></div></div>
-        <div class="pbar-dates">
+        <div class="progress-block-label">余裕スケジュール <span class="pbar-pct">{easy_note}</span></div>
+        <div class="pbar-track" style="width:{easy_track_pct:.1f}%;"><div class="pbar-fill" style="width:{min(easy_pct, 100)}%; background:{easy_color};"></div></div>
+        <div class="pbar-dates" style="width:{easy_track_pct:.1f}%;">
           <span>{start_label} 開始</span>
           <span class="now">{easy_today_label}</span>
           {easy_right}
@@ -285,8 +293,7 @@ def generate_card_html(pj: dict, today: date) -> str:
     """
 
     # --- Gantt chart ---
-    gantt_dates = generate_gantt_dates(start, deadline)
-    gantt_date_labels = "".join(gantt_dates)
+    gantt_date_labels = generate_gantt_dates(start, deadline)
 
     today_pct = min(100, max(0, (today - start).days / total_days * 100))
     weekend_bands = generate_weekend_bands(start, deadline)
@@ -318,8 +325,8 @@ def generate_card_html(pj: dict, today: date) -> str:
         </div>
         """
 
-        # このサイクルに属するタスクを追加
-        for t in tasks["items"]:
+        # このサイクルに属するタスクを追加（全サイクル分）
+        for t in tasks["all_items"]:
             td = parse_task_date(t["date"], today.year)
             if not td:
                 continue
@@ -479,7 +486,7 @@ def main():
         daily_path = pj_dir / "DAILY.md"
 
         plan = parse_plan(plan_path) if plan_path.exists() else {"name": "", "goal": "", "deadline": None, "easy_deadline": None, "start": None, "cycles": []}
-        tasks = parse_tasks(tasks_path) if tasks_path.exists() else {"cycle_name": "", "cycle_goal": "", "items": [], "backlog": []}
+        tasks = parse_tasks(tasks_path) if tasks_path.exists() else {"cycle_name": "", "cycle_goal": "", "items": [], "all_items": [], "backlog": []}
         daily = parse_daily(daily_path) if daily_path.exists() else []
         progress = calc_progress(plan, today)
         task_progress = calc_task_progress(tasks)

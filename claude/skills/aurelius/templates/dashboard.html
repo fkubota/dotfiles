@@ -6,6 +6,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>⚔️</text></svg>">
 <title>AURELIUS — {{DATE}}</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -79,11 +80,11 @@
   /* Progress bars */
   .progress-section {
     display: flex;
-    gap: 32px;
+    flex-direction: column;
+    gap: 16px;
     margin-bottom: 8px;
   }
   .progress-block {
-    flex: 1;
   }
   .progress-block-label {
     font-size: 13px;
@@ -135,11 +136,11 @@
     position: relative;
   }
   .gantt-dates {
-    display: flex;
-    justify-content: space-between;
+    position: relative;
+    height: 16px;
     font-size: 9px;
     color: #ccc;
-    padding: 0;
+    white-space: nowrap;
   }
   .gantt-row {
     display: flex;

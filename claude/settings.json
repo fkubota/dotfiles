@@ -25,6 +25,10 @@
           },
           {
             "type": "command",
+            "command": "~/.claude/hooks/tmux-tab-title-gen.sh"
+          },
+          {
+            "type": "command",
             "command": "~/.claude/hooks/tmux-tab-name.sh"
           }
         ]

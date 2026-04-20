@@ -83,6 +83,65 @@ where 1=1
 - `where 1=1` を使用
 - 条件は次行にインデントして `and` で始める
 
+## テスト (Test-Driven SQL)
+
+クエリの正しさをCTEで検証する。テストは `test` CTEにまとめ、末尾で `cross join test` して実行する。
+
+### エラー表現（PostgreSQL用）
+
+PostgreSQLには `error()` 関数がないため、以下で代用する:
+
+```sql
+cast(date(cast('ここにエラーメッセージ' as text)) as text)
+```
+
+文字列をdateにキャストしようとして失敗することでエラーを発生させる。
+
+### テストのカテゴリ
+
+テストは以下の4種類に分類できる:
+
+| | 単一テーブル | テーブル間 |
+|---|---|---|
+| **行レベル** | NULLチェック、負値チェック | 計算値の一致確認 |
+| **集計レベル** | 合計値の検証 | レコード数の保全確認 |
+
+### テストの書き方
+
+```sql
+, test as (
+select
+    -- 行レベル: NULLが存在しないか
+    case
+        when exists(select 1 from tbl where column1 is null)
+        then cast(date(cast('column1にNULLが存在します' as text)) as text)
+        else 'passed'
+    end as test_no_null
+
+    -- 集計レベル: 件数が元テーブルと一致するか
+    , case
+        when (select count(*) from tbl) != (select count(*) from raw)
+        then cast(date(cast('件数が元テーブルと一致しません' as text)) as text)
+        else 'passed'
+    end as test_count_match
+
+    -- 集計レベル: セグメント合計が全体と一致するか
+    , case
+        when (select sum(amount) from segment_tbl) != (select sum(amount) from tbl)
+        then cast(date(cast('セグメント合計が全体合計と一致しません' as text)) as text)
+        else 'passed'
+    end as test_segment_sum
+)
+
+select *
+from tbl t
+cross join test
+```
+
+- `test` CTEは最後のCTEとして追加する
+- `cross join test` を最終クエリの末尾に付ける
+- テストをスキップしたい場合はコメントアウトする
+
 ## 完全な例
 
 ```sql
@@ -103,7 +162,17 @@ where 1=1
     and a.xxx = 'xxx'
 )
 
+, test as (
+select
+    case
+        when exists(select 1 from tbl where hoge1 is null)
+        then cast(date(cast('hoge1にNULLが存在します' as text)) as text)
+        else 'passed'
+    end as test_no_null
+)
+
 select *
 from tbl t
+cross join test
 order by t.date
 ```

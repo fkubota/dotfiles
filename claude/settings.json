@@ -46,5 +46,10 @@
       }
     ]
   },
-  "skipDangerousModePermissionPrompt": true
+  "skipDangerousModePermissionPrompt": true,
+  "model": "claude-sonnet-4-6",
+  "statusLine": {
+    "type": "command",
+    "command": "~/.claude/statusline.py"
+  }
 }

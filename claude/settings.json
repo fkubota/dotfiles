@@ -1,4 +1,8 @@
 {
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "model": "sonnet",
   "hooks": {
     "Notification": [
       {
@@ -46,10 +50,11 @@
       }
     ]
   },
-  "skipDangerousModePermissionPrompt": true,
-  "model": "claude-sonnet-4-6",
   "statusLine": {
     "type": "command",
     "command": "~/.claude/statusline.py"
-  }
+  },
+  "tui": "default",
+  "skipDangerousModePermissionPrompt": true,
+  "editorMode": "vim"
 }

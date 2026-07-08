@@ -21,15 +21,18 @@ disable-model-invocation: true
   - 末尾: `╰────────────────────────────────────────`
 
 ## プロジェクト管理
-- プロジェクトディレクトリ: `/Users/kubotafumihiro/Git/dekaruto/project/`
+- **gitディレクトリ**: `/Users/kubotafumihiro/Git/dekaruto/project/` （git管理あり）
+- **Google Driveディレクトリ**: `/Users/kubotafumihiro/work/google_drive/dekaruto/` （git管理なし・非公開）
 - ディレクトリ名形式: `yyyymmdd_thema` (例: `20260304_新機能の設計`)
 - テーマ名は日本語を許可します
 - 同じ日に複数のプロジェクトを作成可能です（テーマ名で区別）
 
 ## 実行場所による振る舞い
 - **引数 `new` で実行** (`/dekaruto new`): 新規作成フローを直接開始する（選択肢の提示をスキップし、テーマ名の質問から始める）
+- **引数 `quick <メモ>` で実行** (`/dekaruto quick <メモ内容>`): クイックキャプチャフローを開始する（後述）
 - **引数付きで実行** (`/dekaruto <キーワード>`): キーワードでプロジェクトを検索し、該当するプロジェクトを AskUserQuestion ツールで提示する（検索フローと同様）。0件の場合は「該当するプロジェクトが見つかりませんでした」と伝え、新規作成/再検索/キャンセルの選択肢を提示する
 - `/Users/kubotafumihiro/Git/dekaruto/project/yyyymmdd_thema/` 配下で実行: 自動的に再開
+- `/Users/kubotafumihiro/work/google_drive/dekaruto/yyyymmdd_thema/` 配下で実行: 自動的に再開
 - それ以外の場所で引数なしで実行: AskUserQuestion ツールで選択肢を提示（新規作成/検索/キャンセル）
 
 ## プロジェクトファイル構成
@@ -41,16 +44,53 @@ disable-model-invocation: true
 4. `CONTEXT.md` - 背景情報（必要に応じてClaudeが記入）
 5. `REFERENCES.md` - 参考資料（必要に応じてClaudeが記入）
 
+## クイックキャプチャフロー (`/dekaruto quick <メモ>`)
+
+雑に頭にあることを素早く記録するためのモード。対話を最小限にして、30秒以内に記録完了することを目指す。
+
+1. 両ディレクトリの全プロジェクトのディレクトリ名と SUMMARY.md を軽くスキャンし、メモの内容に最も関連しそうなプロジェクトを上位3件特定する
+2. AskUserQuestion ツールで以下を提示:
+   - 候補プロジェクト（最大3件）
+   - 「新規プロジェクトとして作成する」
+3. 選ばれたプロジェクトに対して以下を**確認なしで即座に**実行する:
+   - `CONTEXT.md` にクイックキャプチャのメモを追記する:
+     ```
+     ## クイックキャプチャ（未整理）
+     <!-- yyyy-mm-dd -->
+     <メモ内容をそのまま記録>
+     ```
+   - `TODO.md` に以下を追記する:
+     ```
+     - [ ] 【要深掘り】クイックキャプチャした内容を整理する（yyyymmdd）
+     ```
+   - `LOG.md` に1行だけ追記する:
+     ```
+     <!-- yyyymmdd クイックキャプチャ: <メモ冒頭20文字程度> -->
+     ```
+4. 完了を短く報告する: 「〇〇プロジェクトに記録しました。次のセッションで深掘りできます。」
+5. それ以上の対話はしない（ユーザーが続けたい場合は話しかけてくる）
+
+**新規プロジェクトが選ばれた場合:**
+- テーマ名だけ質問し、保存先は「Google Driveに保存（非公開）」をデフォルトにして1問で済ませる
+- ファイル作成後、上記3の記録を実行する
+
+## 再開フロー（クイックキャプチャ後）
+- TODO.md に「【要深掘り】」のタスクが残っている場合、再開時に冒頭で必ず触れる:
+  「前回クイックキャプチャされた内容があります。深掘りしますか？」
+
 ## 新規作成フロー
 1. AskUserQuestion ツールで選択肢を提示: 「新規作成」「検索」「キャンセル」
 2. 新規作成が選ばれた場合、テーマ名を質問: 「どのようなテーマにしますか？」
 3. テーマ名検証:
    - 使えない文字（`/` など）があればエラーを出して再入力
    - 同名ディレクトリが既に存在すればエラーを出して再入力
-4. プロジェクトディレクトリ作成: `/Users/kubotafumihiro/Git/dekaruto/project/yyyymmdd_thema/`
-5. 5つのファイルを作成（見出しのみ）
-6. 背景入力を促す: 「まず背景を教えてください」
-7. 背景を聞いた後、CONTEXTに応じて適切な対応をする
+4. AskUserQuestion ツールで保存先を質問:
+   - 「gitで管理する（共有・公開用）」→ `/Users/kubotafumihiro/Git/dekaruto/project/yyyymmdd_thema/`
+   - 「Google Driveに保存する（gitに上げたくない・非公開用）」→ `/Users/kubotafumihiro/work/google_drive/dekaruto/yyyymmdd_thema/`
+5. プロジェクトディレクトリを選択した場所に作成
+6. 5つのファイルを作成（見出しのみ）
+7. 背景入力を促す: 「まず背景を教えてください」
+8. 背景を聞いた後、CONTEXTに応じて適切な対応をする
 
 ## 再開フロー
 1. 全ファイル（TODO.md, SUMMARY.md, LOG.md, CONTEXT.md, REFERENCES.md）を読み込み
@@ -64,10 +104,13 @@ disable-model-invocation: true
 - 0件の場合: 検索条件を変えて再検索を提案
 
 ### 検索の実装手順（必ずこの方法で検索すること）
-1. Bash ツールで `ls /Users/kubotafumihiro/Git/dekaruto/project/` を実行し、全プロジェクトのディレクトリ名一覧を取得する
+1. Bash ツールで以下の両方を実行し、全プロジェクトのディレクトリ名一覧を取得する:
+   - `ls /Users/kubotafumihiro/Git/dekaruto/project/` （gitディレクトリ）
+   - `ls /Users/kubotafumihiro/work/google_drive/dekaruto/` （Google Driveディレクトリ）
+   ※どちらかのディレクトリが存在しない場合はエラーを無視する
 2. 取得した一覧の中から、キーワードを含むディレクトリ名を部分一致でフィルタリングする
-3. ディレクトリ名で見つからない場合は、Grep ツールで各プロジェクトの SUMMARY.md を検索する
-4. 結果を AskUserQuestion ツールで提示する
+3. ディレクトリ名で見つからない場合は、Grep ツールで各プロジェクトの SUMMARY.md を両ディレクトリで検索する
+4. 結果を AskUserQuestion ツールで提示する際、各項目にどちらのディレクトリか（git / Google Drive）を明記する
 
 ## ファイル更新タイミング
 - ユーザーが明示的に指示した時

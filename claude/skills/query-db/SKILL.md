@@ -1,7 +1,7 @@
 ---
 name: query-db
 description: staging/hotfix/production環境のPostgreSQLにSSHトンネル経由で読み取り専用クエリを実行する
-disable-model-invocation: true
+disable-model-invocation: false
 ---
 
 # DB クエリ実行コマンド
@@ -90,6 +90,15 @@ PGPASSWORD=<パスワード> psql -h localhost -p 5432 -U table_plus -d foodies 
 | psql接続失敗 | トンネルが起動しているか `lsof -iTCP:5432` で確認 |
 
 ### 6. クエリ実行
+
+**必ず以下の順序で進める（説明とクエリの提示 → 実行 → 結果表示を1つのメッセージ内で済ませない）：**
+
+1. **実行前**: なぜこのクエリを実行するのか目的を一言説明する（「〜を確かめたいので、以下のクエリを実行します」など）
+2. **実行前**: 実行するSQL文をコードブロックで提示する
+3. ここで実際にクエリを実行する（psqlコマンド）
+4. **実行後**: 結果をMarkdownの表に整形して表示する（目安10行程度、それ以上ある場合は全体件数を添える）
+
+調査のために複数回クエリを試行する場合も、各回でこの順序を守ること（まとめて最後に一括表示しない）。
 
 ```bash
 PGPASSWORD=<パスワード> psql -h localhost -p 5432 -U table_plus -d foodies -c "<SQL文>"
@@ -184,3 +193,4 @@ LEFT JOIN orders ON s.id = orders.shop_id;
 - **productionは本番データ**: 実際のユーザーデータが含まれているため慎重に扱うこと
 - **ポート競合**: ローカルでPostgreSQLが起動している場合は停止するか、別ポートを使用すること
 - **重いクエリに注意**: LIMITなしの大規模JOINは環境に負荷をかけるため避けること
+- **説明→クエリ提示→実行→結果表示の順序を必ず守ること**: 詳細は「6. クエリ実行」参照。実行前の説明・クエリ提示を省略したり、実行後にまとめて表示したりしない。

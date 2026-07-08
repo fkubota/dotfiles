@@ -55,7 +55,10 @@ def parse_plan(plan_path: Path) -> dict:
 
 def parse_tasks(tasks_path: Path) -> dict:
     text = tasks_path.read_text(encoding="utf-8")
-    tasks = {"cycle_name": "", "cycle_goal": "", "items": [], "all_items": [], "backlog": []}
+    tasks = {"cycle_name": "", "cycle_goal": "", "items": [], "all_items": [], "backlog": [], "is_complete": False}
+
+    if re.search(r"## ステータス.*✅.*完了", text):
+        tasks["is_complete"] = True
 
     m = re.search(r"## 現在のサイクル[:：]\s*(.+)", text)
     if m:
@@ -428,6 +431,10 @@ def generate_card_html(pj: dict, today: date) -> str:
     </div>
     """
 
+    gantt_section = "" if tasks.get("is_complete") else f"""
+      <div class="section-title">Gantt Chart</div>
+      {gantt_html}"""
+
     return f"""
     <div class="project-card">
       <div class="pj-header">
@@ -436,8 +443,7 @@ def generate_card_html(pj: dict, today: date) -> str:
       </div>
       <div class="section-title">Overall Progress</div>
       {progress_html}
-      <div class="section-title">Gantt Chart</div>
-      {gantt_html}
+      {gantt_section}
       {today_html}
       {tables_html}
     </div>

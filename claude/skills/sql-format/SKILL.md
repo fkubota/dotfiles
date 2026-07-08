@@ -27,6 +27,7 @@ SQLを書くとき・例示するときは以下のフォーマットに従う�
 
 - **すべて小文字** - キーワード（select, from, where, left join など）も小文字
 - **カンマは行頭** - 2つ目以降のカラムは `, column_name` の形式
+- **`join` は使わない** - 内部結合は必ず `inner join` と明示する
 
 ## CTE (Common Table Expression)
 
@@ -62,14 +63,17 @@ select
 
 ## JOIN
 
+- 内部結合は `join` ではなく **`inner join`** と書く
+
 ```sql
 -- 単一条件: 同じ行に書く
-left join bbb b on a.id = b.id
+inner join bbb b on a.id = b.id
+left join ccc c on a.id = c.id
 
 -- 複数条件: 改行してインデント
-left join ccc c
-    on a.id = c.id
-    and a.key = c.key
+inner join ddd d
+    on a.id = d.id
+    and a.key = d.key
 ```
 
 ## WHERE句

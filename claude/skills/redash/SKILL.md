@@ -26,6 +26,15 @@ API キーは必ず環境変数から読み取る。ハードコードしない�
 | `/queries/{query_id}/source#{result_id}` | query_id, result_id の両方 |
 | `/queries/{query_id}` | query_id のみ |
 
+## 実行前の提示ルール（必須）
+
+クエリを**実行（POST）する前に**、何が実行されるかを必ずユーザーに提示する：
+
+- **保存済みクエリの実行**: クエリID・クエリ名・渡すパラメータ・Redash URL（`https://redash.hanzo.cloud/queries/{query_id}`）を提示してから実行する。SQL 全文の提示は不要（求められたときに提示する）
+- **新規・アドホックなSQLを書く場合**: 実行前に SQL 全文を提示する（`sql-format` スキルのルールを適用）
+- 複数クエリをまとめて実行する場合は、一覧（ID・名前・パラメータ）を先に提示してよい。1件ずつ承認を待つ必要はない
+- キャッシュ済み結果の GET（読み取りのみ）はこのルールの対象外
+
 ## 実行フロー
 
 ### 1. API キーの確認
@@ -97,11 +106,27 @@ GET https://redash.hanzo.cloud/api/queries/{query_id}/results?api_key={REDASH_AP
 
 ### 4. クエリの再実行（必要な場合のみ）
 
-ユーザーが最新データを要求した場合のみ実行：
+以下のいずれかの場合のみ実行する（実行前に「実行前の提示ルール」に従うこと）：
+- ユーザーが最新データを要求した場合
+- パラメータ付きクエリで、目的のパラメータに対応するキャッシュ結果が無い場合（キャッシュは最後に実行されたパラメータの結果しか持たないため）
+
 ```
 POST https://redash.hanzo.cloud/api/queries/{query_id}/results
 Body: {"max_age": 0}
 ```
+
+### 5. パラメータ付きクエリの実行
+
+パラメータ定義は `GET /api/queries/{query_id}` の `options.parameters` から取得する。
+実行は POST の Body に `parameters` を含める：
+
+```
+POST https://redash.hanzo.cloud/api/queries/{query_id}/results
+Body: {"parameters": {"param_name": "value", ...}, "max_age": 0}
+```
+
+- レスポンスに `job` が含まれる場合は非同期実行。`GET /api/jobs/{job_id}` をポーリングし、`status=3`（成功）になったら `query_result_id` で結果を取得する。`status=4,5` は失敗
+- ダッシュボードURL（`/dashboard/{slug}?p_xxx=...`）を渡された場合は、`GET /api/dashboards/{slug}` でウィジェット一覧からクエリIDを特定し、`p_` プレフィックスを除いた名前でパラメータを対応づける
 
 ## トラブルシューティング
 

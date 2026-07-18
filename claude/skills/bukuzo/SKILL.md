@@ -1,13 +1,36 @@
 ---
-name: bukuzou
+name: bukuzo
 description: LuaLaTeX + Python matplotlib で技術書・社内教科書を作成・編集する
 disable-model-invocation: true
 ---
 
-# bukuzou
+# bukuzo
 
 LuaLaTeX（MacTeX）と Python matplotlib を使って、技術書・社内教科書を作成・編集するスキルです。
 複数のソース（ナレッジベース、コードベース、外部ドキュメント）から内容を収集し、PDF にまとめます。
+
+## ルール
+- 応答の囲い:
+  - 冒頭: `╭── bukuzo ────────────────────────────`
+  - 末尾: `╰────────────────────────────────────────`
+
+## 執筆の検証ルール（全書籍プロジェクト共通）
+- 本文に書くのは**一次資料で裏取りできた確定情報だけ**。
+  機構・因果の断定はエージェント要約や伝聞・仮説を根拠にせず、
+  ソースコード本体を直接読んで反証確認してから書く
+
+## 言い訳テーブル（省略禁止事項への先制反論）
+
+以下の思考が浮かんだら、それは手抜きのサインである。右列に従うこと。
+
+| 言い訳 | 現実 |
+|---|---|
+| 「この図は前回確認したので今回の目視チェックは不要」 | 再生成・再コンパイルした図は**毎回**Read ツールで開いて全項目チェックする |
+| 「コンパイルは1回通ったので完了でよい」 | 参照解決のため**必ず2回**実行し、Undefined references = 0 を確認する |
+| 「エージェントの要約にそう書いてあったので本文に書いてよい」 | 機構・因果の断定はソースコード本体を直接読んで反証確認してから書く |
+| 「図の確認が終わっていないがコンパイル成功を報告したい」 | 全図の確認が完了するまでコンパイル報告をしない |
+| 「章を書き終えたが品質チェックは後でまとめてやればよい」 | 章追加後の品質チェック（\pageref カバレッジ・用語集・コンパイル確認）は章ごとに実行する |
+| 「RULES.md は前に読んだから今回は読まなくてよい」 | セッション開始時に必ず読み込み、執筆中は常に参照する |
 
 ---
 
@@ -15,9 +38,9 @@ LuaLaTeX（MacTeX）と Python matplotlib を使って、技術書・社内教�
 
 | 呼び出し形式 | 動作 |
 |---|---|
-| `/bukuzou` (引数なし) | AskUserQuestion で「新規作成 / 既存を開く / キャンセル」を提示 |
-| `/bukuzou new` | 新規作成フローを直接開始 |
-| `/bukuzou <キーワード>` | キーワードで既存プロジェクトを検索し選択 |
+| `/bukuzo` (引数なし) | AskUserQuestion で「新規作成 / 既存を開く / キャンセル」を提示 |
+| `/bukuzo new` | 新規作成フローを直接開始 |
+| `/bukuzo <キーワード>` | キーワードで既存プロジェクトを検索し選択 |
 | 書籍プロジェクトディレクトリ内で実行 | 自動的に再開フロー |
 
 書籍プロジェクトディレクトリの判定: カレントディレクトリ（またはその親）に `.book/LOG.md` が存在する場合。
@@ -137,7 +160,7 @@ ltjsbook では以下の4階層を使う:
    - 章（\chapter）が本文の基本単位
    - ファイル名は `p{部番号}_ch{章番号}_{英名}.tex` 形式
 9. **プロジェクトディレクトリ・`.book/` ファイルを作成**
-10. **main.tex の雛形を作成**: ltjsbook クラス、\part/\chapter 構造、カラー定義、tcolorbox スタイル込み
+10. **main.tex の雛形を作成**: **`references/latex-setup.md` を読み**、ltjsbook クラス、\part/\chapter 構造、カラー定義、tcolorbox スタイル込みの雛形を作る
 11. 執筆開始
 
 ---
@@ -177,36 +200,13 @@ lualatex -interaction=nonstopmode -jobname="出力ファイル名（拡張子な
 
 ### 図の種類と使い分け
 
-図の内容によってツールを使い分ける。
+図の内容によってツールを使い分ける。TikZ のプリアンブル設定・graphviz のセットアップ手順は `references/latex-setup.md` を参照。
 
 | 図の種類 | ツール | 記法 |
 |---|---|---|
 | データ可視化（折れ線・散布図・棒グラフ） | **matplotlib**（Python） | `scripts/fig_xxx.py` → `figures/fig_xxx.png` |
 | フロー図・概念図・タイムライン（箱と矢印） | **TikZ**（LaTeX ネイティブ） | `.tex` ファイル内に直接記述 |
 | シンプルな DAG・依存関係図 | **graphviz（dot）** | `scripts/fig_xxx.dot` → `figures/fig_xxx.png` |
-
-#### TikZ（フロー図・概念図）
-
-LaTeX ネイティブのため追加ツール不要。ベクター品質でそのまま PDF に埋め込まれる。
-`main.tex` のプリアンブルに以下を追加する:
-
-```latex
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric, arrows.meta, positioning, fit, calc}
-```
-
-#### graphviz（DAG・依存関係図）
-
-```bash
-# インストール（初回のみ）
-brew install graphviz
-
-# PNG 生成
-dot -Tpng scripts/fig_xxx.dot -o figures/fig_xxx.png
-```
-
-dot ファイルは `scripts/` に置き、生成した PNG を `figures/` に出力する。
-Makefile の `figures:` ターゲットに追加しておくこと。
 
 ### 図の生成
 
@@ -242,51 +242,9 @@ Read ツールで各 PNG ファイルを開き、以下の項目をチェック�
 問題が見つかった場合はスクリプト（または TikZ コード）を修正して再生成し、再度チェックする。
 全図の確認が完了するまでコンパイル報告をしない。
 
-### 推奨 LaTeX 設定（main.tex 雛形）
+### LaTeX 設定の詳細
 
-```latex
-\documentclass[12pt,a4paper,openany]{ltjsbook}
-\usepackage{luatexja}
-\usepackage{luatexja-fontspec}
-\usepackage[top=25mm,bottom=25mm,left=28mm,right=28mm,footskip=12mm]{geometry}
-\usepackage{graphicx}
-\usepackage[dvipsnames,svgnames,x11names]{xcolor}
-\usepackage[most,breakable]{tcolorbox}
-\usepackage{booktabs}
-\usepackage{tabularx}
-\usepackage{enumitem}
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{float}
-\usepackage{fancyhdr}
-\usepackage{titlesec}
-\usepackage[unicode,colorlinks=true,linkcolor=primaryColor,urlcolor=primaryColor]{hyperref}
-```
-
-### 部・章・節・項の階層（ltjsbook）
-
-```latex
-\part{第1部 タイトル}    % 部：大テーマのまとまり
-  \chapter{タイトル}     % 章：1ファイル = 1章
-    \section{タイトル}   % 節：章内の大見出し
-      \subsection{タイトル}  % 項：節内の小見出し
-```
-
-**重要**: `\section` や `\subsection` のタイトルに「3.2」「3.4.1」などの番号を書いてはいけない。
-LaTeX が自動で番号を付けるため、書くと「3.4.1　3.4.1 仕組み」のように二重表示になる。
-
-- 節番号は `章番号.節番号` で自動生成（例: 3.2）
-- 項番号は `章番号.節番号.項番号` で自動生成（例: 3.2.1）
-- `\setcounter{tocdepth}{2}` で目次に節まで表示（項は非表示）
-- `\setcounter{secnumdepth}{3}` で項まで番号付け
-
-### tcolorbox スタイル（3種推奨）
-
-| スタイル名 | 用途 | 枠色 |
-|---|---|---|
-| `pointbox` | ポイント・まとめ | primaryColor（コーラルなど） |
-| `warningbox` | 注意・禁止事項 | 濃赤 |
-| `termbox` | 用語定義 | グリーン |
+main.tex 雛形（推奨パッケージ一式）、部・章・節・項の番号ルール、tcolorbox スタイル3種、TikZ/graphviz のセットアップは `references/latex-setup.md` にまとめてある。**新規プロジェクト作成時・プリアンブル編集時に必ず読むこと**。
 
 ---
 
@@ -316,66 +274,8 @@ LaTeX が自動で番号を付けるため、書くと「3.4.1　3.4.1 仕組み
 
 ## ユビキタス言語レビュー（全章執筆完了後に実行）
 
-全章の執筆が一通り完了した後に行う用語統一フロー。
-用語集（appendix_a.tex）を正（source of truth）として本文全体の表記を統一する。
-
-### フロー
-
-#### ステップ1: 用語集の全エントリを抽出
-`appendix_a.tex` の `\item[用語名]` をすべて読み出し、**正式用語リスト**を作成する。
-
-#### ステップ2: 全章を横断して用語の使われ方を収集
-
-各章ファイルに対して以下を調べる:
-- 正式用語リストの用語と**微妙に異なる表記**（例: 「人件費率」vs「人時売上高」、「配置基準」vs「配置モデル」）
-- **同じ概念を複数の単語で表現**しているケース（用語集に登録されていない揺れ）
-
-収集結果を以下の2種に分類する:
-
-| 分類 | 内容 | 対応 |
-|---|---|---|
-| **A: 用語集との表記ゆれ** | 用語集に登録済みの概念が、本文で別の書き方をされている | 用語集の表記に自動修正 |
-| **B: 未登録の表記ゆれ** | 用語集にない概念が複数の単語で表現されている | ユーザーに相談して決定 |
-
-#### ステップ3: A（用語集との表記ゆれ）を自動修正
-
-用語集の表記を正として、該当箇所を自動的に置換する。
-修正後に対象ファイルを保存する。
-
-#### ステップ4: B（未登録の表記ゆれ）をユーザーに相談
-
-以下の形式で報告し、どれを正式用語にするか確認する:
-
-```
-【表記ゆれ】「〇〇」「△△」「□□」が同じ概念を指しています。
-- ソースコード: `xxxxx`（英名: xxx）
-- HANZO-DOCS:「△△」が多用されています
-→ サジェスト: 「△△」を正式用語にすることを推奨します。いかがでしょうか？
-```
-
-ユーザーが選択したら:
-1. 用語集（appendix_a.tex）に正式用語として追加する
-2. `RULES.md` の用語統一表に追記する
-3. 全章の本文を正式用語に統一する
-
-#### ステップ5: コンパイルして最終確認
-
-```bash
-lualatex -interaction=nonstopmode -jobname="出力ファイル名" main.tex
-lualatex -interaction=nonstopmode -jobname="出力ファイル名" main.tex
-```
-
-Undefined references = 0 を確認する。
-
-### サジェストの根拠
-
-B の未登録表記ゆれをサジェストする際は、以下の優先順位でソースを参照する:
-
-1. **ソースコード**（モデル名・カラム名・クラス名などの英語識別子から日本語名を推定）
-2. **HANZO-DOCS**（ドメイン仕様書・要件定義書での使用頻度）
-3. **用語集の既存エントリ**（類似概念との整合性）
-
-根拠を明示したうえでサジェストし、最終決定はユーザーに委ねる。
+全章の執筆が一通り完了した後、用語集（appendix_a.tex）を正として本文全体の表記を統一するレビューを行う。
+実行時は **`references/terminology-review.md` を読み**、そのフロー（抽出→収集→自動修正→ユーザー相談→最終コンパイル）に従うこと。
 
 ---
 
@@ -408,7 +308,7 @@ B の未登録表記ゆれをサジェストする際は、以下の優先順位
 
 ```bash
 printf "\n\033[1;93m╔════════════════════════════════════════════════╗\033[0m\n"
-printf "\033[1;93m║              \033[1;92m📖 BUKUZOU \033[1;95mACTIVATED\033[1;93m              ║\033[0m\n"
+printf "\033[1;93m║              \033[1;92m📖 BUKUZO \033[1;95mACTIVATED\033[1;93m               ║\033[0m\n"
 printf "\033[1;93m╚════════════════════════════════════════════════╝\033[0m\n\n"
 ```
 

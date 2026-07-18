@@ -27,13 +27,17 @@ disable-model-invocation: true
 - テーマ名は日本語を許可します
 - 同じ日に複数のプロジェクトを作成可能です（テーマ名で区別）
 
-## 実行場所による振る舞い
-- **引数 `new` で実行** (`/dekaruto new`): 新規作成フローを直接開始する（選択肢の提示をスキップし、テーマ名の質問から始める）
-- **引数 `quick <メモ>` で実行** (`/dekaruto quick <メモ内容>`): クイックキャプチャフローを開始する（後述）
-- **引数付きで実行** (`/dekaruto <キーワード>`): キーワードでプロジェクトを検索し、該当するプロジェクトを AskUserQuestion ツールで提示する（検索フローと同様）。0件の場合は「該当するプロジェクトが見つかりませんでした」と伝え、新規作成/再検索/キャンセルの選択肢を提示する
-- `/Users/kubotafumihiro/Git/dekaruto/project/yyyymmdd_thema/` 配下で実行: 自動的に再開
-- `/Users/kubotafumihiro/work/google_drive/dekaruto/yyyymmdd_thema/` 配下で実行: 自動的に再開
-- それ以外の場所で引数なしで実行: AskUserQuestion ツールで選択肢を提示（新規作成/検索/キャンセル）
+## 引数・実行場所による振る舞い
+
+| 呼び出し形式 | 動作 |
+|---|---|
+| `/dekaruto new` | 新規作成フローを直接開始（選択肢の提示をスキップし、テーマ名の質問から始める） |
+| `/dekaruto quick <メモ>` | クイックキャプチャフローを開始（後述） |
+| `/dekaruto <キーワード>` | キーワードでプロジェクトを検索し、AskUserQuestion で提示（検索フローと同様）。0件なら「該当するプロジェクトが見つかりませんでした」と伝え、新規作成/再検索/キャンセルの選択肢を提示 |
+| プロジェクトディレクトリ配下で実行 | 自動的に再開フロー |
+| それ以外の場所で引数なし | AskUserQuestion で選択肢を提示（新規作成/検索/キャンセル） |
+
+プロジェクトディレクトリの判定: カレントディレクトリが `/Users/kubotafumihiro/Git/dekaruto/project/yyyymmdd_thema/` または `/Users/kubotafumihiro/work/google_drive/dekaruto/yyyymmdd_thema/` 配下の場合。
 
 ## プロジェクトファイル構成
 各プロジェクトには以下の5つのファイルを作成します（初期状態は見出しのみ）:

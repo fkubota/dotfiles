@@ -47,7 +47,30 @@ from aaa
 - 最初のCTEは `with xxx as (`
 - 2つ目以降は `, xxx as (` （行頭カンマ）
 - CTE間は空行を入れる
-- with句の中身は、最初にインデントを入れない。(select, fromなどが一番左から始まる。)
+- **with句の中身は、最初にインデントを入れない**。(select, fromなどが一番左から始まる。)
+
+```sql
+-- NG: with句の中で1段深くインデントしている
+, target_shops as (
+    select
+        s.name
+        , s.mesh_code
+    from
+        shops as s
+    where 1=1
+        and s.mesh_code is not null
+)
+
+-- OK: select/from/where はCTEの中でも一番左から
+, target_shops as (
+select
+    s.name
+    , s.mesh_code
+from shops as s
+where 1=1
+    and s.mesh_code is not null
+)
+```
 
 ## SELECT句
 
@@ -61,19 +84,28 @@ select
 - 1カラム目はインデントのみ
 - 2カラム目以降は行頭カンマ `    , column`
 
-## JOIN
+## FROM / JOIN
 
+- **`from` とテーブル名は同じ行に書く**（`from` を単独行にしない）
+- **join は from と同じインデントレベル**（字下げしない）
 - 内部結合は `join` ではなく **`inner join`** と書く
+- 結合条件が単一なら `on` を同じ行に、複数なら `on` / `and` を改行してインデント
 
 ```sql
--- 単一条件: 同じ行に書く
-inner join bbb b on a.id = b.id
-left join ccc c on a.id = c.id
+-- OK
+from table_a as a
+left join table_b as b on a.id = b.id
+left join table_c as c
+    on a.id = c.id
+    and a.xxx = c.xxx
 
--- 複数条件: 改行してインデント
-inner join ddd d
-    on a.id = d.id
-    and a.key = d.key
+-- NG: fromが単独行・joinが字下げされている
+from
+    table_a as a
+    left join table_b as b on a.id = b.id
+    inner join table_c as c
+        on a.id = c.id
+        and a.xxx = c.xxx
 ```
 
 ## WHERE句

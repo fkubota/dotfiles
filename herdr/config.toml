@@ -1,0 +1,85 @@
+onboarding = false
+# herdr 設定 — tmux (.tmux.conf) からの移植
+# リロード: herdr server reload-config
+
+[theme]
+# tmux: nord-tmux テーマ相当（herdr 組み込みの nord テーマ）
+name = "nord"
+
+auto_switch = false
+[theme.custom]
+# サイドバーの補助テキスト（作業内容・エージェント名・new/menu等）が
+# 薄すぎて読めないため、muted系トークンを明るめに上書き
+subtext0 = "#c3cbd8"
+overlay1 = "#aeb8ca"
+# overlay0はサイドバー2行目(作業内容)に使われるが、DIM修飾子で半減されるため
+# かなり明るめに設定してDIM後でも読めるようにする
+overlay0 = "#d4dbe6"
+
+[terminal]
+# tmux: set-option -g default-shell /opt/homebrew/bin/fish
+default_shell = "/opt/homebrew/bin/fish"
+# 新規ペイン/タブはカレントディレクトリを引き継ぐ
+# （tmux の split-window -c '#{pane_current_path}' 相当。"follow" がデフォルト値）
+# new_cwd = "follow"
+
+[keys]
+# tmux: set-option -g prefix C-f
+prefix = "ctrl+f"
+# tmux: bind | split-window -h
+# （水平分割 split_horizontal はデフォルトで prefix+minus = tmux の bind - と同一）
+split_vertical = "prefix+|"
+# ペイン移動はデフォルトで prefix+h/j/k/l（tmux の bind h/j/k/l と同一）
+# リサイズは prefix+r でリサイズモードに入る方式（tmux の bind -r H/J/K/L の代替）
+# コピーモードは prefix+[（vi 風操作が組み込み）
+# NAVIGATE モードでのワークスペース選択を j/k に変更
+# （デフォルトは ↑/↓ のみ。j/k はペインフォーカスに割当済みなので矢印に退避）
+navigate_workspace_up = "k"
+navigate_workspace_down = "j"
+navigate_pane_up = "up"
+navigate_pane_down = "down"
+# prefix+ctrl+j/k でサイドバーのエージェントを上下移動
+# NOTE: 以前は素の ctrl+j/k だったが、ctrl+j は LF(0x0A)＝Shift+Enter と同じコードのため、
+# Claude 等での Shift+Enter 改行を横取りしてエージェント切替が誤発火していた。
+# prefix を挟むことで素の Shift+Enter は横取りされず改行として通る。
+# prefix+j/k（ペインフォーカス）とは Ctrl 修飾子で区別され、衝突しない。
+next_agent = "prefix+ctrl+j"
+previous_agent = "prefix+ctrl+k"
+# 組み込みのワークスペースピッカーは無効化し、prefix+w は下の自作
+# fzfピッカー（プレビュー付きpopup）に割り当てる
+workspace_picker = ""
+
+# prefix+w: fzfワークスペースピッカー（右側に選択中ペインのプレビュー表示）
+[[keys.command]]
+key = "prefix+w"
+type = "popup"
+command = "/Users/kubotafumihiro/Git/dotfiles/herdr/workspace-picker.sh"
+width = "90%"
+height = "80%"
+
+[ui]
+# tmux 風に prefix+c で名前入力なしで即タブ作成
+prompt_new_tab_name = false
+# tmux: set -g pane-active-border-style fg=colour229 相当
+accent = "#ffffaf"
+# 検出したエージェント名（claude等）をペイン境界に表示
+# （tmuxのautomatic-renameの代替。手動でペイン名を付けた場合はそちらが優先）
+show_agent_labels_on_pane_borders = true
+# マウス操作 (tmux: set -g mouse on) はデフォルトで有効
+# mouse_capture = true
+# マウス選択で自動コピー（tmux の copy-pipe 相当）もデフォルトで有効
+# copy_on_select = true
+
+[ui.toast]
+# エージェントの状態変化（完了/ブロック等）をアプリ内トーストで通知
+# OS のデスクトップ通知にしたい場合は "system" に変更
+delivery = "herdr"
+
+[ui.sidebar.agents]
+# サイドバーのエージェント行の表示内容
+# 1行目: 状態アイコン + ワークスペース名 + タブ名
+# 2行目: 作業内容（ターミナルタイトル。Claude Code 等が現在のタスクを報告する）
+# NOTE: 2行目(terminal_title_stripped)はDIM修飾子付きで描画される。
+# v0.7.4ではトークン単位のスタイル指定（{ token = ..., dim = false }）は未対応。
+# 次リリース(v0.7.5?)で対応予定 → rows = [[...], [{ token = "terminal_title_stripped", dim = false }]]
+rows = [["state_icon", "workspace", "tab"], ["terminal_title_stripped"]]

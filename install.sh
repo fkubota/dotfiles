@@ -29,6 +29,10 @@ ln -sf ${DOT_DIR}/vim/rc/dein_lazy.toml ~/.vim/rc/dein_lazy.toml
 # tmux
 ln -sf ${DOT_DIR}/tmux/.tmux.conf ~/.tmux.conf
 
+# herdr
+mkdir -p ~/.config/herdr
+ln -sf ${DOT_DIR}/herdr/config.toml ~/.config/herdr/config.toml
+
 # git
 ln -sf ${DOT_DIR}/git/.gitignore_global ~/.gitignore_global
 git config --global core.excludesfile ~/.gitignore_global

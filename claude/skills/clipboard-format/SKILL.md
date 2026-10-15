@@ -106,22 +106,39 @@ from table
 
 **必ずこの形（HTML + string の同時セット）を使う。RTFは使わない。**
 
+⚠️ **プレーンテキスト側は必ず `«class utf8»` で読むこと。`as string` は使わない。**
+AppleScript の `read ... as string` は**MacRoman として解釈する**ため、**日本語が確実に文字化けする**。
+そしてSlackが実際に採用するのは（HTMLではなく）**プレーンテキスト側**のことがあるため、
+ここが壊れていると装飾以前に文字が読めなくなる。
+
 ```bash
 HTML_PATH="/path/to/scratch.html"
 PLAIN_PATH="/path/to/scratch.txt"
 
 osascript <<APPLESCRIPT
 set htmlData to read (POSIX file "$HTML_PATH") as «class HTML»
-set plainData to read (POSIX file "$PLAIN_PATH") as string
+set plainData to read (POSIX file "$PLAIN_PATH") as «class utf8»
 set the clipboard to {«class HTML»:htmlData, string:plainData}
 APPLESCRIPT
 ```
 
-実行後、`osascript -e 'clipboard info'` で `«class HTML»` が含まれていることを確認する。
+### 4-2. 貼り付け前の検証（省略しない）
+
+`clipboard info` だけでは文字化けを検出できない。**必ず中身を読み戻して目視する。**
+
+```bash
+osascript -e 'clipboard info' | tr ',' '\n' | paste -sd' ' -   # «class HTML» があるか
+pbpaste | head -5                                              # ★プレーン側の日本語が正しいか
+```
+
+`pbpaste` の出力に日本語が正しく出ていなければ、そのままでは貼れない。
 
 ### 5. ユーザーへの報告
 「Slack用に装飾（太字・コードブロック）した状態でコピーしました」と一言添える。
 実際にSlackに貼ってみて崩れる場合は、HTMLタグの組み方（`<pre><code>`の中に余計な装飾を入れていないか等）を疑って調整する。
+
+**文字化けした場合は、まず `as string` を使っていないかを疑う**（上記4の警告を参照）。
+それでも直らなければ、装飾を諦めて `pbcopy` でプレーンのみコピーする（UTF-8なので化けない）。
 
 ## 既知の注意点
 - OSは macOS 前提（`osascript` を使用）。Windows/Linuxの場合は別途対応が必要（未実装）。
